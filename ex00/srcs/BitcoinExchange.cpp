@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 23:48:56 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/21 00:11:38 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/21 00:13:58 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,3 +139,5 @@ bool BitcoinExchange::isDateValid(int year, int month, int day) const
 
     return day >= 1 && day <= days;
 }
+
+/* BitcoinExchange.cpp */

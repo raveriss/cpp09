@@ -6,12 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 00:10:10 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/21 00:10:15 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/21 00:17:56 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion de la classe BitcoinExchange */
-#include "BitcoinExchange.hpp"
+#include "../incs/BitcoinExchange.hpp"
 
 /* Inclusion de la bibliothèque standard pour std::cout */
 #include <iostream>
@@ -80,7 +80,8 @@ int main(int argc, char** argv)
     BitcoinExchange exchange;
     try
     {
-        exchange.loadDatabase("database.txt"); // Assurez-vous que ce fichier existe dans le bon répertoire
+        /* Assurez-vous que ce fichier existe dans le bon répertoire */
+        exchange.loadDatabase("database.txt");
     }
     catch (const std::exception& e)
     {
@@ -98,7 +99,8 @@ int main(int argc, char** argv)
     std::string line;
     while (std::getline(inputFile, line))
     {
-        if (line == "date | value") continue; // Ignore the header line
+        if (line == "date | value")
+            continue;
 
         std::istringstream iss(line);
         std::string date;
@@ -106,8 +108,11 @@ int main(int argc, char** argv)
 
         if (std::getline(iss, date, '|') && std::getline(iss, valueStr))
         {
-            date = date.substr(0, date.find_last_not_of(" ") + 1); // Trim spaces
-            valueStr = valueStr.substr(valueStr.find_first_not_of(" ")); // Trim spaces
+            /* Trim spaces */
+            date = date.substr(0, date.find_last_not_of(" ") + 1);
+            
+            /* Trim spaces */
+            valueStr = valueStr.substr(valueStr.find_first_not_of(" "));
             std::istringstream valueStream(valueStr);
             double value;
 
@@ -142,3 +147,5 @@ int main(int argc, char** argv)
     inputFile.close();
     return RETURN_SUCCESS;
 }
+
+/* main.cpp */
