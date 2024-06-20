@@ -1,18 +1,44 @@
-#include "BitcoinExchange.hpp"
-#include <fstream>
-#include <sstream>
-#include <iostream>
-#include <iomanip>
-#include <cstdlib> // Pour std::atoi
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/20 23:48:56 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/21 00:11:38 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+/* Inclure les fichiers pour la classe BitcoinExchange */
+#include "../incs/BitcoinExchange.hpp"
+
+/* Inclure les fichiers pour std::ifstream */
+#include <fstream>
+
+/* Inclure les fichiers pour std::istringstream */
+#include <sstream>
+
+/* Inclure les fichiers pour l'utilisation de cout */
+#include <iostream>
+
+/* Inclure les fichiers pour std::runtime_error */
+#include <iomanip>
+
+/* Inclure les fichiers pour std::atoi */
+#include <cstdlib>
+
+/* Constructeur par défaut */
 BitcoinExchange::BitcoinExchange()
 {}
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
+/* Constructeur par copie */
+BitcoinExchange::BitcoinExchange(const BitcoinExchange & other)
 : exchangeRates(other.exchangeRates)
 {}
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+/* Surcharge de l'opérateur = */
+BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other)
 {
     if (this != &other)
         exchangeRates = other.exchangeRates;
@@ -20,9 +46,13 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
     return *this;
 }
 
+/* Destructeur */
 BitcoinExchange::~BitcoinExchange()
 {}
 
+/**
+ * @brief Fonction pour charger la base de données
+ */
 void BitcoinExchange::loadDatabase(const std::string& filename)
 {
     std::ifstream file(filename.c_str());
@@ -41,10 +71,12 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
         if (iss >> date >> delimiter >> rate && delimiter == ',')
             exchangeRates[date] = rate;
     }
-
     file.close();
 }
 
+/**
+ * @brief Fonction pour obtenir la valeur à une date donnée
+ */
 double BitcoinExchange::getValueAt(const std::string& date, double amount) const
 {
     if (!isValidDate(date))
@@ -65,6 +97,9 @@ double BitcoinExchange::getValueAt(const std::string& date, double amount) const
     return amount * it->second;
 }
 
+/**
+ * @brief Fonction pour vérifier si une date est valide
+ */
 bool BitcoinExchange::isValidDate(const std::string& date) const
 {
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
@@ -80,11 +115,17 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
     return isDateValid(year, month, day);
 }
 
+/**
+ * @brief Fonction pour vérifier si une année est bissextile
+ */
 bool BitcoinExchange::isLeapYear(int year) const
 {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
+/**
+ * @brief Fonction pour vérifier si une date est valide
+ */
 bool BitcoinExchange::isDateValid(int year, int month, int day) const
 {
     if (month < 1 || month > 12)
