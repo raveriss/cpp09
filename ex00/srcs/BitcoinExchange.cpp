@@ -6,43 +6,68 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/21 19:53:55 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/21 20:15:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Inclusion de la classe BitcoinExchange */
 #include "BitcoinExchange.hpp"
+
+/* Inclusion de la bibliothèque standard pour std::ifstream */
 #include <fstream>
+
+/* Inclusion de la bibliothèque standard pour std::sstream */
 #include <sstream>
+
+/* Inclusion de la bibliothèque standard pour std::runtime_error */
 #include <stdexcept>
+
+/* Inclure les fichiers pour les limites des types */
 #include <limits>
+
+/* Inclure les fichiers pour les limites des types */
 #include <cstdlib> // Pour atof et strtod
 
+/* Inclusion de la bibliothèque standard pour std::cout */
+#include <iostream>
+
+/**
+ * @brief Constructeur par défaut
+ */
 BitcoinExchange::BitcoinExchange()
 {}
 
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
-: exchangeRates(other.exchangeRates)
+/**
+ * @brief Constructeur par copie
+ */
+BitcoinExchange::BitcoinExchange(const BitcoinExchange & other)
+: _exchangeRates(other._exchangeRates)
 {}
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
+/**
+ * @brief Opérateur d'affectation
+ */
+BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other)
 {
-    if (this != &other)
-    {
-        exchangeRates = other.exchangeRates;
-    }
+    if (this != & other)
+        _exchangeRates = other._exchangeRates;
     return *this;
 }
 
+/**
+ * @brief Destructeur
+ */
 BitcoinExchange::~BitcoinExchange()
 {}
 
-void BitcoinExchange::loadDatabase(const std::string& filename)
+/**
+ * @brief Charge la base de données
+ */
+void BitcoinExchange::loadDatabase(const std::string & filename)
 {
     std::ifstream file(filename.c_str());
     if (!file)
-    {
         throw std::runtime_error("Error: could not open file.");
-    }
 
     std::string line, date;
     double rate;
@@ -51,20 +76,19 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
     {
         std::stringstream ss(line);
         if (getline(ss, date, ',') && (ss >> rate))
-        {
-            exchangeRates[date] = rate;
-        }
+            _exchangeRates[date] = rate;
     }
 }
 
-void BitcoinExchange::processInput(const std::string& filename)
+/**
+ * @brief Traite l'entrée
+ */
+void BitcoinExchange::processInput(const std::string & filename)
 {
     std::ifstream file(filename.c_str());
     if (!file)
-    {
         throw std::runtime_error("Error: could not open file.");
-    }
-
+        
     std::string line, date, valueStr;
     double value;
     getline(file, line); // skip the header
@@ -106,24 +130,30 @@ void BitcoinExchange::processInput(const std::string& filename)
     }
 }
 
-double BitcoinExchange::getExchangeRate(const std::string& date) const
+/**
+ * @brief Récupère le taux de change
+ */
+double BitcoinExchange::getExchangeRate(const std::string & date) const
 {
-    std::map<std::string, double>::const_iterator it = exchangeRates.lower_bound(date);
-    if (it == exchangeRates.end() || it->first != date)
+    std::map<std::string, double>::const_iterator it = _exchangeRates.lower_bound(date);
+    if (it == _exchangeRates.end() || it->first != date)
     {
-        if (it == exchangeRates.begin()) return 0;
+        if (it == _exchangeRates.begin())
+            return 0;
         --it;
     }
     return it->second;
 }
 
+/**
+ * @brief Fonction membre pour vérifier la validité de la date
+ */
 bool BitcoinExchange::isValidDate(const std::string& date) const
 {
     // Simple check for format YYYY-MM-DD
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
-    {
         return false;
-    }
+        
     // Extract year, month, day
     int year = atoi(date.substr(0, 4).c_str());
     int month = atoi(date.substr(5, 2).c_str());
@@ -151,6 +181,9 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
     return true;
 }
 
+/**
+ * @brief Fonction membre pour vérifier la validité de la valeur
+ */
 bool BitcoinExchange::isValidValue(const std::string& value) const
 {
     char* end;
