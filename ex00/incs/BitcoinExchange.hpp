@@ -1,9 +1,9 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
+#include <iostream>
 #include <map>
 #include <string>
-#include <stdexcept>
 
 class BitcoinExchange {
 public:
@@ -12,15 +12,14 @@ public:
     BitcoinExchange& operator=(const BitcoinExchange& other);
     ~BitcoinExchange();
 
-    void loadDatabase(); // Notez le changement ici : plus besoin d'argument
-
-    double getValueAt(const std::string& date, double amount) const;
+    void loadDatabase(const std::string& filename);
+    void processInput(const std::string& filename);
+    double getExchangeRate(const std::string& date) const;
 
 private:
     std::map<std::string, double> exchangeRates;
     bool isValidDate(const std::string& date) const;
-    bool isLeapYear(int year) const;
-    bool isDateValid(int year, int month, int day) const;
+    bool isValidValue(const std::string& value) const;
 };
 
 #endif // BITCOINEXCHANGE_HPP
