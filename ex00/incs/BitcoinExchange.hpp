@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:59 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/21 20:07:10 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/22 15:30:53 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ class BitcoinExchange
 
 		/* Fonction membre pour vérifier la validité de la valeur */
         bool isValidValue(const std::string & value) const;
+
+        bool isDigitsOnly(const std::string& str) const;
 };
 
 #endif
