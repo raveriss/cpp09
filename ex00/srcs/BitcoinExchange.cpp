@@ -6,27 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:42:45 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:54:54 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion de la classe BitcoinExchange */
 #include "BitcoinExchange.hpp"
-
-/* Inclusion de la bibliothèque standard pour std::ifstream */
-#include <fstream>
-
-/* Inclusion de la bibliothèque standard pour std::sstream */
-#include <sstream>
-
-/* Inclusion de la bibliothèque standard pour std::runtime_error */
-#include <stdexcept>
-
-/* Inclusion de la bibliothèque standard pour std::atof */
-#include <cstdlib>
-
-/* Inclusion de la bibliothèque standard pour std::cout */
-#include <iostream>
 
 /**
  * @brief Constructeur par défaut
@@ -206,59 +191,59 @@ double BitcoinExchange::getExchangeRate(const std::string& date) const
  */
 bool BitcoinExchange::isValidDate(const std::string& date) const
 {
-	/* Check if the date is of the form YYYY-MM-DD */
-    if (date.size() != 10 || date[4] != '-' || date[7] != '-')
+
+    /* Check if the date is of the form YYYY-MM-DD */
+    if (date.size() != DATE_LENGTH || date[YEAR_POSITION] != '-' || date[MONTH_POSITION] != '-')
         return false;
 
-	/* Check if the year is a number */
-    for (int i = 0; i < 4; ++i)
-    {
-        if (!isdigit(date[i]))
-            return false;
-    }
-	
-	/* Check if the month is a number */
-    for (int i = 5; i < 7; ++i)
+    /* Check if the year is a number */
+    for (int i = MIN_YEAR_DIGITS; i < MAX_YEAR_DIGITS; ++i)
     {
         if (!isdigit(date[i]))
             return false;
     }
 
-	/* Check if the day is a number */
-    for (int i = 8; i < 10; ++i)
+    /* Check if the month is a number */
+    for (int i = MIN_MONTH_DIGITS; i < MAX_MONTH_DIGITS; ++i)
     {
         if (!isdigit(date[i]))
             return false;
     }
 
-	/* Extract year from date: substr first 4 chars, c_str to const char* for atoi, atoi to int */
-    int year = atoi(date.substr(0, 4).c_str());
-
-	/* Extract month from date: substr 5th and 6th chars, c_str to const char* for atoi, atoi to int */
-    int month = atoi(date.substr(5, 2).c_str());
-
-	/* Extract day from date: substr 8th and 9th chars, c_str to const char* for atoi, atoi to int */
-    int day = atoi(date.substr(8, 2).c_str());
-
-	/* Check if the month is between 1 and 12 */
-    if (month < 1 || month > 12)
-        return false;
-
-	/* Check if the day is between 1 and 31 */
-    if (day < 1 || day > 31)
-        return false;
-
-	/* Check if the month is February */
-    if (month == 2)
+    /* Check if the day is a number */
+    for (int i = MIN_DAY_DIGITS; i < MAX_DAY_DIGITS; ++i)
     {
-		/* Check if the year is a leap year */
+        if (!isdigit(date[i]))
+            return false;
+    }
+
+    /* Extract year from date: substr first 4 chars, c_str to const char* for atoi, atoi to int */
+    int year = atoi(date.substr(MIN_YEAR_DIGITS, 4).c_str());
+
+    /* Extract month from date: substr 5th and 6th chars, c_str to const char* for atoi, atoi to int */
+    int month = atoi(date.substr(MIN_MONTH_DIGITS, 2).c_str());
+
+    /* Extract day from date: substr 8th and 9th chars, c_str to const char* for atoi, atoi to int */
+    int day = atoi(date.substr(MIN_DAY_DIGITS, 2).c_str());
+
+    /* Check if the month is between 1 and 12 */
+    if (month < MIN_MONTH || month > MAX_MONTH)
+        return false;
+
+    /* Check if the day is between 1 and 31 */
+    if (day < MIN_DAY || day > MAX_DAY)
+        return false;
+
+    /* Check if the month is February */
+    if (month == FEBRUARY)
+    {
+        /* Check if the year is a leap year */
         bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
         if (day > 29 || (day == 29 && !isLeap))
             return false;
     }
-	
-	/* Check if the month is April, June, September or November */
-    else if (month == 4 || month == 6 || month == 9 || month == 11)
+    /* Check if the month is April, June, September or November */
+    else if (month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER)
     {
         if (day > 30)
             return false;
@@ -266,6 +251,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
 
     return true;
 }
+
 
 /**
  * @brief Vérifie si la valeur est valide

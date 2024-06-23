@@ -6,20 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:54:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:39:31 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:49:32 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion de la classe BitcoinExchange */
 #include "BitcoinExchange.hpp"
-
-/* Inclusion de la bibliothèque standard pour std::cerr */
-#include <iostream>
-
-/* Define values */
-#define RETURN_SUCCESS 0
-#define RETURN_FAILURE 1
-#define EXPECTED_ARGC 2
 
 /**
  * @brief Fonction main
