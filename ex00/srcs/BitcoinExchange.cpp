@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:30:23 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:42:45 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ BitcoinExchange::~BitcoinExchange()
 {}
 
 /**
- * @brief Charge la base de données
+ * @brief Charge la base de données data.csv
  */
 void BitcoinExchange::loadDatabase(const std::string& filename)
 {
@@ -91,7 +91,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 }
 
 /**
- * @brief Traite l'entrée
+ * @brief Traite l'entrée input.txt
  */
 void BitcoinExchange::processInput(const std::string& filename)
 {
@@ -256,6 +256,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
         if (day > 29 || (day == 29 && !isLeap))
             return false;
     }
+	
 	/* Check if the month is April, June, September or November */
     else if (month == 4 || month == 6 || month == 9 || month == 11)
     {
