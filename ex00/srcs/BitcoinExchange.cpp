@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:26:55 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:30:23 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@
 
 /* Inclusion de la bibliothèque standard pour std::runtime_error */
 #include <stdexcept>
-
-/* Inclure les fichiers pour les limites des types */
-#include <limits>
 
 /* Inclusion de la bibliothèque standard pour std::atof */
 #include <cstdlib>
