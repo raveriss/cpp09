@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:23:43 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:26:55 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
  */
 bool BitcoinExchange::isValidValue(const std::string& value) const
 {
+	/* Declare a pointer to a char */
     char* end;
 
 	/* Convert the string to a double */
@@ -282,3 +283,5 @@ bool BitcoinExchange::isValidValue(const std::string& value) const
 	/* Check if the conversion was successful and the value is positive */
     return end != value.c_str() && *end == '\0' && val >= 0;
 }
+
+/* BitcoinExchange.cpp */

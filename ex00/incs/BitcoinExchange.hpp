@@ -6,12 +6,11 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:59 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/22 15:30:53 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 01:25:18 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
+#pragma once
 
 /* Inclusion de la bibliothèque standard pour std::map */
 #include <map>
@@ -60,7 +59,5 @@ class BitcoinExchange
 
         bool isDigitsOnly(const std::string& str) const;
 };
-
-#endif
 
 /* BitcoinExchange.hpp */
