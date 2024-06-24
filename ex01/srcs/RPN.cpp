@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 19:04:38 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/25 01:07:51 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ RPN::RPN(const RPN & other)
 /**
  * @brief Surcharge operator =
  */
-RPN& RPN::operator=(const RPN & other)
+RPN & RPN::operator = (const RPN & other)
 {
     if (this != &other)
         _stack = other._stack;
