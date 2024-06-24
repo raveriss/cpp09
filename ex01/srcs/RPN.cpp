@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 18:14:24 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 19:04:38 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ RPN::RPN()
  * @brief Construct RPN by copy
  */
 RPN::RPN(const RPN & other)
-: stack(other.stack)
+: _stack(other._stack)
 {}
 
 /**
@@ -31,7 +31,7 @@ RPN::RPN(const RPN & other)
 RPN& RPN::operator=(const RPN & other)
 {
     if (this != &other)
-        stack = other.stack;
+        _stack = other._stack;
     return *this;
 }
 
@@ -84,27 +84,28 @@ int RPN::evaluate(const std::string & expression)
             std::stringstream ss(token);
             int number;
             ss >> number;
-            stack.push(number);
+            _stack.push(number);
         }
         else if (isOperator(token))
         {
-            if (stack.size() < 2)
+            if (_stack.size() < 2)
                 throw std::runtime_error("Error: Not enough operands for operation");
-            int operand2 = stack.top();
-            stack.pop();
-            int operand1 = stack.top();
-            stack.pop();
+            int operand2 = _stack.top();
+            _stack.pop();
+            int operand1 = _stack.top();
+            _stack.pop();
             int result = performOperation(token, operand1, operand2);
-            stack.push(result);
+            _stack.push(result);
         }
         else
             throw std::runtime_error("Error: Invalid token '" + token + "'");
     }
 
-    if (stack.size() != 1)
+    /* Check if there is only one operand left on the stack */
+    if (_stack.size() != 1)
         throw std::runtime_error("Error: Too many operands left on the stack");
 
-    return stack.top();
+    return _stack.top();
 }
 
 /* RPN.cpp */

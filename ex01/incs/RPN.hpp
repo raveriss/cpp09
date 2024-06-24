@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:45:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 18:21:57 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:27:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ class RPN
     private:
 
         /* Pile d'entiers */
-        std::stack<int> stack;
+        std::stack<int> _stack;
 
         /** Function to check if a token is an operator */
         bool isOperator(const std::string & token);
