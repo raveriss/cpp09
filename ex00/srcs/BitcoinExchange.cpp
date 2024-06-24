@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 02:23:04 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:00:43 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,26 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
 	/* Déclare une variable de type double */
     double rate;
 
-	/* Skip the header */
-    getline(file, line);
+    /* Declare a boolean headerPresent */
+    bool headerPresent = false;
 
+    /* Check if the first line contains header */
+    if (std::getline(file, line))
+    {
+        /* Check if the first line is "date,exchange_rate" */
+        if (line == "date,exchange_rate")
+            headerPresent = true;
+        else
+        {
+            /* Create a stringstream from the line */
+            std::istringstream ss(line);
+
+            /* Extract the date and rate from the line */
+            if (std::getline(ss, date, ',') && (ss >> rate))
+                _exchangeRates[date] = rate;
+        }
+    }
+    
 	/* Lit le fichier ligne par ligne */
     while (getline(file, line))
     {
@@ -93,12 +110,24 @@ void BitcoinExchange::processInput(const std::string & filename)
 	/* Déclare une variable de type double */
     double value;
 
-	/* Skip the header */
-    getline(file, line);
-	
-	/* Check if the header is of the form "date | value" */
-    if (line != "date | value")
-        throw std::runtime_error("Error: invalid input format.");
+    /* Declare a boolean headerPresent */
+    bool headerPresent = false;
+
+    /* Check if the first line contains header */
+    if (std::getline(file, line))
+    {
+        /* Check if the first line is "date,exchange_rate" */
+        if (line == "date,exchange_rate")
+            headerPresent = true;
+        
+        else
+        {
+            /* Process the first line as a valid data line */
+            std::istringstream ss(line);
+            if (std::getline(ss, date, ',') && (ss >> value))
+                _exchangeRates[date] = value;
+        }
+    }
 
 	/* Read the file line by line */
     while (getline(file, line))
