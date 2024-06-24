@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:59 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:55:18 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:02:46 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@
 #define MAX_MONTH 12
 #define MIN_DAY 1
 #define MAX_DAY 31
+
+/* Définition des constantes pour les longueurs de sous-chaînes */
+#define YEAR_LENGTH 4
+#define MONTH_LENGTH 2
+#define DAY_LENGTH 2
 
 /* Définition des constantes pour les mois */
 #define FEBRUARY 2

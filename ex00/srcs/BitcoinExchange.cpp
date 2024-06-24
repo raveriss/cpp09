@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 01:54:54 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:13:30 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,13 +218,13 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
     }
 
     /* Extract year from date: substr first 4 chars, c_str to const char* for atoi, atoi to int */
-    int year = atoi(date.substr(MIN_YEAR_DIGITS, 4).c_str());
+    int year = atoi(date.substr(MIN_YEAR_DIGITS, YEAR_LENGTH).c_str());
 
     /* Extract month from date: substr 5th and 6th chars, c_str to const char* for atoi, atoi to int */
-    int month = atoi(date.substr(MIN_MONTH_DIGITS, 2).c_str());
+    int month = atoi(date.substr(MIN_MONTH_DIGITS, MONTH_LENGTH).c_str());
 
     /* Extract day from date: substr 8th and 9th chars, c_str to const char* for atoi, atoi to int */
-    int day = atoi(date.substr(MIN_DAY_DIGITS, 2).c_str());
+    int day = atoi(date.substr(MIN_DAY_DIGITS, DAY_LENGTH).c_str());
 
     /* Check if the month is between 1 and 12 */
     if (month < MIN_MONTH || month > MAX_MONTH)
@@ -237,21 +237,27 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
     /* Check if the month is February */
     if (month == FEBRUARY)
     {
-        /* Check if the year is a leap year */
-        bool isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        /* Declare a boolean isLeap */
+        bool isLeap;
+
+		/* Check if the year is a leap year */
+		isLeap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+
+		/* Check if the day is greater than 29 or 29 on a non-leap year */
         if (day > 29 || (day == 29 && !isLeap))
             return false;
     }
+
     /* Check if the month is April, June, September or November */
     else if (month == APRIL || month == JUNE || month == SEPTEMBER || month == NOVEMBER)
     {
+		/* Check if the day is greater than 30 */
         if (day > 30)
             return false;
     }
 
     return true;
 }
-
 
 /**
  * @brief Vérifie si la valeur est valide
