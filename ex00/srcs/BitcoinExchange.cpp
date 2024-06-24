@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 02:13:30 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/24 02:23:04 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ BitcoinExchange::~BitcoinExchange()
 /**
  * @brief Charge la base de données data.csv
  */
-void BitcoinExchange::loadDatabase(const std::string& filename)
+void BitcoinExchange::loadDatabase(const std::string & filename)
 {
 	/* Ouvre le fichier data.csv */
     std::ifstream file(filename.c_str());
@@ -78,7 +78,7 @@ void BitcoinExchange::loadDatabase(const std::string& filename)
 /**
  * @brief Traite l'entrée input.txt
  */
-void BitcoinExchange::processInput(const std::string& filename)
+void BitcoinExchange::processInput(const std::string & filename)
 {
 	/* Ouvre le fichier input.txt */
     std::ifstream file(filename.c_str());
@@ -170,7 +170,7 @@ void BitcoinExchange::processInput(const std::string& filename)
 /**
  * @brief Récupère le taux de change
  */
-double BitcoinExchange::getExchangeRate(const std::string& date) const
+double BitcoinExchange::getExchangeRate(const std::string & date) const
 {
 	/* Find first element in _exchangeRates with key >= date, store const iterator */
     std::map<std::string, double>::const_iterator it = _exchangeRates.lower_bound(date);
@@ -189,7 +189,7 @@ double BitcoinExchange::getExchangeRate(const std::string& date) const
 /**
  * @brief Vérifie si la date est valide
  */
-bool BitcoinExchange::isValidDate(const std::string& date) const
+bool BitcoinExchange::isValidDate(const std::string & date) const
 {
 
     /* Check if the date is of the form YYYY-MM-DD */
@@ -262,7 +262,7 @@ bool BitcoinExchange::isValidDate(const std::string& date) const
 /**
  * @brief Vérifie si la valeur est valide
  */
-bool BitcoinExchange::isValidValue(const std::string& value) const
+bool BitcoinExchange::isValidValue(const std::string & value) const
 {
 	/* Declare a pointer to a char */
     char* end;
