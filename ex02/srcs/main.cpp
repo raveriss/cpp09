@@ -6,15 +6,26 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/25 15:56:11 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:51:11 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* Inclusion of the PmergeMe header file */
 #include "../incs/PmergeMe.hpp"
+
+/* Include the standard library for std::cout */
 #include <iostream>
+
+/* Include the standard library for std::vector */
 #include <vector>
+
+/* Include the standard library for std::deque */
 #include <deque>
+
+
 #include <ctime>
+
+
 #include <cstdlib>
 
 /**
