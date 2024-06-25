@@ -6,13 +6,13 @@
 #    By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/14 10:21:16 by raveriss          #+#    #+#              #
-#    Updated: 2024/06/24 17:45:15 by raveriss         ###   ########.fr        #
+#    Updated: 2024/06/25 12:08:53 by raveriss         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Makefile for the Zombie project with progress bar and separate object directory
 
-NAME = RPN
+NAME = PmergeMe
 SRC_DIR = srcs
 OBJ_DIR = obj
 INC_DIR = incs
