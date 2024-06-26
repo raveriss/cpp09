@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/26 09:58:59 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 00:24:07 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int main(int argc, char* argv[])
     }
 
     std::vector<int> data;
+    std::deque<int> deq;
+
     for (int i = 1; i < argc; ++i)
     {
         if (!isPositiveInteger(argv[i]))
@@ -60,15 +62,19 @@ int main(int argc, char* argv[])
             std::cerr << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << std::endl;
             return RETURN_FAILURE;
         }
-        data.push_back(std::atoi(argv[i]));
+        int num = std::atoi(argv[i]);
+        data.push_back(num);
+        deq.push_back(num);
     }
+    std::cout << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n";
+    std::cout << "/*                                  VECTOR                                   */\n";
+    std::cout << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n\n";
 
     std::cout << "Before: ";
     for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it)
     {
         std::cout << *it << " ";
     }
-    std::cout << std::endl;
 
     /* Measure time for std::vector */
     std::clock_t startVector = std::clock();
@@ -77,17 +83,14 @@ int main(int argc, char* argv[])
     double durationVector = 1000000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
 
     /* Measure time for std::deque */
-    std::deque<int> deq(data.begin(), data.end());
+    std::cout << "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n";
+    std::cout << "/*                                   DEQUE                                   */\n";
+    std::cout << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */";
     std::clock_t startDeque = std::clock();
     mergeInsertSort(deq);
     std::clock_t endDeque = std::clock();
     double durationDeque = 1000000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
 
-    std::cout << "After: ";
-    for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it)
-    {
-        std::cout << *it << " ";
-    }
     std::cout << std::endl;
 
     std::cout << "Time to process a range of " << data.size() << " elements with std::vector: " 

@@ -6,14 +6,13 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:22 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/26 17:33:22 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 00:10:02 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
-
 #include <algorithm>
 #include <vector>
 #include <deque>
@@ -25,7 +24,7 @@ void printContainer(Iterator begin, Iterator end)
     {
         std::cout << *it << " ";
     }
-    std::cout << std::endl;
+	std::cout << "]";
 }
 
 /**
@@ -104,24 +103,24 @@ void printContainer(Iterator begin, Iterator end)
 template <typename ContainerType>
 void merge(typename ContainerType::iterator iterBegin, typename ContainerType::iterator iterMid, typename ContainerType::iterator iterEnd)
 {
-	/* Declare the container type */
     typedef typename ContainerType::value_type ValueType;
 
-	/* Création des sous-tableaux pour la fusion */
+    /* Création des sous-tableaux pour la fusion */
     std::vector<ValueType> leftSubArray(iterBegin, iterMid + 1);
     std::vector<ValueType> rightSubArray(iterMid + 1, iterEnd + 1);
 
-	/* Initialisation des itérateurs pour la fusion */
+    /* Initialisation des itérateurs pour la fusion */
     typename std::vector<ValueType>::iterator iterLeft = leftSubArray.begin();
     typename std::vector<ValueType>::iterator iterRight = rightSubArray.begin();
     typename ContainerType::iterator iterMerge = iterBegin;
 
-    std::cout << "Initial state: ";
-    printContainer(iterBegin, iterEnd + 1);
+    std::cout << "\nMerging :\n";
+    std::cout << "         Left SubArray                 Right SubArray\n";
 
     /* Fusionner les deux moitiés */
     while (iterLeft != leftSubArray.end() && iterRight != rightSubArray.end())
     {
+
         if (*iterLeft <= *iterRight)
         {
             *iterMerge = *iterLeft;
@@ -133,10 +132,12 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
             ++iterRight;
         }
         ++iterMerge;
+		std::cout << "[ ";
+        printContainer(iterBegin, iterMid + 1);
+		std::cout << " [ ";
+		printContainer(iterMid + 1, iterEnd + 1);
+		std::cout << std::endl;
 
-        std::cout << "Merging: ";
-        printContainer(iterBegin, iterEnd + 1);		
-		
     }
 
     /* Copier les éléments restants de leftSubArray */
@@ -153,14 +154,10 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
         *iterMerge = *iterRight;
         ++iterRight;
         ++iterMerge;
-
-        std::cout << "Copying Right: ";
+        std::cout << "Current merged state: ";
         printContainer(iterBegin, iterEnd + 1);
-		
     }
 }
-
-
 
 /**
  * @brief Trie une section du conteneur
@@ -224,33 +221,27 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
 template <typename Container>
 void insertionSort(typename Container::iterator begin, typename Container::iterator end)
 {
-	/* Declare the current iterator */
-	typename Container::iterator current;
+    typename Container::iterator current;
 
-	
-	current = begin + 1;
-	for (; current <= end; ++current)
-	{
-		typename Container::value_type currentValue = *current;
-		typename Container::iterator previous = current - 1;
+    current = begin + 1;
+    for (; current <= end; ++current)
+    {
+        typename Container::value_type currentValue = *current;
+        typename Container::iterator previous = current - 1;
 
-		while (previous >= begin && *previous > currentValue)
-		{
-			*(previous + 1) = *previous;
-			if (previous == begin)
-			{
-				/* Exit the loop */
-				--previous;
-				break;
-			}
-			--previous;
-		}
-		*(previous + 1) = currentValue;
-
-
-	}
+        while (previous >= begin && *previous > currentValue)
+        {
+            *(previous + 1) = *previous;
+            if (previous == begin)
+            {
+                --previous;
+                break;
+            }
+            --previous;
+        }
+        *(previous + 1) = currentValue;
+    }
 }
-
 
 /** 
  * @brief Trie un conteneur en utilisant l'algorithme de tri fusion-insertion
@@ -306,26 +297,43 @@ void insertionSort(typename Container::iterator begin, typename Container::itera
 template <typename T>
 void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
 {
-	if (std::distance(left, right) <= 10)
-	{
-		/* Explicitly specify the template argument */
-		insertionSort<T>(left, right);
-	}
-	else
-	{
-		typename T::iterator mid = left + std::distance(left, right) / 2;
-		mergeInsertSortHelper(container, left, mid);
-		mergeInsertSortHelper(container, mid + 1, right);
+    if (std::distance(left, right) <= 10)
+    {
+        insertionSort<T>(left, right);
+        std::cout << "\nInsertion Sort: [ ";
+        printContainer(left, right + 1);
+    }
+    else
+    {
+        typename T::iterator mid = left + std::distance(left, right) / 2;
+
+		std::cout << std::endl;
+        std::cout << "\nBefore Left Recursion: [ ";
+        printContainer(left, mid + 1);
+
+        std::cout << "\nBefore Right Recursion: [ ";
+        printContainer(mid + 1, right + 1);
 		
-		/* Explicitly specify the template argument */
-		merge<T>(left, mid, right); 
-	}
+		std::cout << std::endl;
+
+        mergeInsertSortHelper(container, left, mid);
+        mergeInsertSortHelper(container, mid + 1, right);
+
+		std::cout << std::endl;
+
+        std::cout << "\nBefore Merge: [ ";
+        printContainer(left, right + 1);
+
+        merge<T>(left, mid, right);
+
+        std::cout << "\nAfter Merge:\n[ ";
+        printContainer(left, right + 1);
+		std::cout << std::endl;
+    }
 }
 
 template <typename T>
 void mergeInsertSort(T& container)
 {
-	mergeInsertSortHelper(container, container.begin(), container.end() - 1);
+    mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }
-
-/* PmergeMe.tpp */
