@@ -6,15 +6,27 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 15:32:22 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/25 15:45:50 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:33:22 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <iostream>
+
 #include <algorithm>
 #include <vector>
 #include <deque>
+
+template <typename Iterator>
+void printContainer(Iterator begin, Iterator end)
+{
+    for (Iterator it = begin; it != end; ++it)
+    {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
 
 /**
  * @brief Fusionne deux moitiés d'un conteneur
@@ -89,49 +101,65 @@
  * La fonction dépend de la bibliothèque <vector> pour utiliser les 
  * vecteurs temporaires leftHalf et rightHalf.
  */
-template <typename T>
-void merge(typename T::iterator left, typename T::iterator mid, typename T::iterator right)
+template <typename ContainerType>
+void merge(typename ContainerType::iterator iterBegin, typename ContainerType::iterator iterMid, typename ContainerType::iterator iterEnd)
 {
-    typedef typename T::value_type value_type;
-    std::vector<value_type> leftHalf(left, mid + 1);
-    std::vector<value_type> rightHalf(mid + 1, right + 1);
+	/* Declare the container type */
+    typedef typename ContainerType::value_type ValueType;
 
-    typename std::vector<value_type>::iterator i = leftHalf.begin();
-    typename std::vector<value_type>::iterator j = rightHalf.begin();
-    typename T::iterator k = left;
+	/* Création des sous-tableaux pour la fusion */
+    std::vector<ValueType> leftSubArray(iterBegin, iterMid + 1);
+    std::vector<ValueType> rightSubArray(iterMid + 1, iterEnd + 1);
 
-    /* Merge the two halves */
-    while (i != leftHalf.end() && j != rightHalf.end())
+	/* Initialisation des itérateurs pour la fusion */
+    typename std::vector<ValueType>::iterator iterLeft = leftSubArray.begin();
+    typename std::vector<ValueType>::iterator iterRight = rightSubArray.begin();
+    typename ContainerType::iterator iterMerge = iterBegin;
+
+    std::cout << "Initial state: ";
+    printContainer(iterBegin, iterEnd + 1);
+
+    /* Fusionner les deux moitiés */
+    while (iterLeft != leftSubArray.end() && iterRight != rightSubArray.end())
     {
-        if (*i <= *j)
+        if (*iterLeft <= *iterRight)
         {
-            *k = *i;
-            ++i;
+            *iterMerge = *iterLeft;
+            ++iterLeft;
         }
         else
         {
-            *k = *j;
-            ++j;
+            *iterMerge = *iterRight;
+            ++iterRight;
         }
-        ++k;
+        ++iterMerge;
+
+        std::cout << "Merging: ";
+        printContainer(iterBegin, iterEnd + 1);		
+		
     }
 
-    /* Copy the remaining elements of leftHalf */
-    while (i != leftHalf.end())
+    /* Copier les éléments restants de leftSubArray */
+    while (iterLeft != leftSubArray.end())
     {
-        *k = *i;
-        ++i;
-        ++k;
+        *iterMerge = *iterLeft;
+        ++iterLeft;
+        ++iterMerge;
     }
 
-    /* Copy the remaining elements of rightHalf */
-    while (j != rightHalf.end())
+    /* Copier les éléments restants de rightSubArray */
+    while (iterRight != rightSubArray.end())
     {
-        *k = *j;
-        ++j;
-        ++k;
+        *iterMerge = *iterRight;
+        ++iterRight;
+        ++iterMerge;
+
+        std::cout << "Copying Right: ";
+        printContainer(iterBegin, iterEnd + 1);
+		
     }
 }
+
 
 
 /**
@@ -193,30 +221,36 @@ void merge(typename T::iterator left, typename T::iterator mid, typename T::iter
  * std::vector<int> vec = {1, 3, 5, 2, 4, 6};
  * insertionSort<std::vector<int>>(vec.begin(), vec.end() - 1);
  */
-template <typename T>
-void insertionSort(typename T::iterator left, typename T::iterator right)
+template <typename Container>
+void insertionSort(typename Container::iterator begin, typename Container::iterator end)
 {
-    for (typename T::iterator i = left + 1; i <= right; ++i)
-    {
-        typename T::value_type key = *i;
-        typename T::iterator j = i - 1;
+	/* Declare the current iterator */
+	typename Container::iterator current;
 
-        while (j >= left && *j > key)
-        {
-            *(j + 1) = *j;
-            if (j == left)
-            {
-                /* Exit the loop */
-                --j;
-                break;
-            }
-            --j;
-        }
-        *(j + 1) = key;
-    }
+	
+	current = begin + 1;
+	for (; current <= end; ++current)
+	{
+		typename Container::value_type currentValue = *current;
+		typename Container::iterator previous = current - 1;
+
+		while (previous >= begin && *previous > currentValue)
+		{
+			*(previous + 1) = *previous;
+			if (previous == begin)
+			{
+				/* Exit the loop */
+				--previous;
+				break;
+			}
+			--previous;
+		}
+		*(previous + 1) = currentValue;
+
+
+	}
 }
 
-// Merge-Insertion sort (Ford-Johnson)
 
 /** 
  * @brief Trie un conteneur en utilisant l'algorithme de tri fusion-insertion
@@ -272,26 +306,26 @@ void insertionSort(typename T::iterator left, typename T::iterator right)
 template <typename T>
 void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
 {
-    if (std::distance(left, right) <= 10)
-    {
-        /* Explicitly specify the template argument */
-        insertionSort<T>(left, right);
-    }
-    else
-    {
-        typename T::iterator mid = left + std::distance(left, right) / 2;
-        mergeInsertSortHelper(container, left, mid);
-        mergeInsertSortHelper(container, mid + 1, right);
-        
-        /* Explicitly specify the template argument */
-        merge<T>(left, mid, right); 
-    }
+	if (std::distance(left, right) <= 10)
+	{
+		/* Explicitly specify the template argument */
+		insertionSort<T>(left, right);
+	}
+	else
+	{
+		typename T::iterator mid = left + std::distance(left, right) / 2;
+		mergeInsertSortHelper(container, left, mid);
+		mergeInsertSortHelper(container, mid + 1, right);
+		
+		/* Explicitly specify the template argument */
+		merge<T>(left, mid, right); 
+	}
 }
 
 template <typename T>
 void mergeInsertSort(T& container)
 {
-    mergeInsertSortHelper(container, container.begin(), container.end() - 1);
+	mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }
 
 /* PmergeMe.tpp */
