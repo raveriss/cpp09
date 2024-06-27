@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 00:24:07 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:33:22 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int main(int argc, char* argv[])
         std::cout << *it << " ";
     }
 
+    std::cout << std::endl;
+
     /* Measure time for std::vector */
     std::clock_t startVector = std::clock();
     mergeInsertSort(data);
@@ -85,7 +87,16 @@ int main(int argc, char* argv[])
     /* Measure time for std::deque */
     std::cout << "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n";
     std::cout << "/*                                   DEQUE                                   */\n";
-    std::cout << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */";
+    std::cout << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n";
+    
+    std::cout << "Before: ";
+    for (std::deque<int>::iterator it = deq.begin(); it != deq.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+
+    std::cout << std::endl;
+    
     std::clock_t startDeque = std::clock();
     mergeInsertSort(deq);
     std::clock_t endDeque = std::clock();
