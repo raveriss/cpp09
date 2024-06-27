@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/25 15:50:22 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:15:43 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@
 
 /* Inclusion de la bibliothèque standard pour std::deque */
 #include <deque>
+
+/* Include the standard library for std::cout */
+#include <iostream>
+
+/* Include the standard library for std::deque */
+#include <deque>
+
+/* Include the standard library for clock_t */
+#include <ctime>
+
+/* Include the standard library for std::atoi */
+#include <cstdlib>
 
 /* Define values */
 #define RETURN_SUCCESS 0

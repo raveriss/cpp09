@@ -6,27 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 16:33:22 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:20:58 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion of the PmergeMe header file */
 #include "../incs/PmergeMe.hpp"
-
-/* Include the standard library for std::cout */
-#include <iostream>
-
-/* Include the standard library for std::vector */
-#include <vector>
-
-/* Include the standard library for std::deque */
-#include <deque>
-
-/* Include the standard library for clock_t */
-#include <ctime>
-
-/* Include the standard library for std::atoi */
-#include <cstdlib>
 
 /**
  * @brief Check if a string is a positive integer
@@ -111,3 +96,5 @@ int main(int argc, char* argv[])
 
     return RETURN_SUCCESS;
 }
+
+/* main.cpp */

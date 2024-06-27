@@ -6,12 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 19:27:04 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:06:45 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion de la classe BitcoinExchange */
-#include "BitcoinExchange.hpp"
+#include "../incs/BitcoinExchange.hpp"
 
 /**
  * @brief Constructeur par défaut
@@ -42,25 +42,37 @@ BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other)
 BitcoinExchange::~BitcoinExchange()
 {}
 
-// Fonction pour vérifier si un caractère est un espace blanc
-bool isNotSpace(char ch) {
+/**
+ * Fonction pour vérifier si un caractère est un espace blanc
+ */
+bool isNotSpace(char ch)
+{
     return !std::isspace(static_cast<unsigned char>(ch));
 }
 
-// Fonction pour supprimer les espaces en tête de la chaîne
-std::string& ltrim(std::string &s) {
+/**
+ * Fonction pour supprimer les espaces en tête de la chaîne
+ */
+std::string& ltrim(std::string &s)
+{
     s.erase(s.begin(), std::find_if(s.begin(), s.end(), isNotSpace));
     return s;
 }
 
-// Fonction pour supprimer les espaces en queue de la chaîne
-std::string& rtrim(std::string &s) {
+/**
+ * Fonction pour supprimer les espaces en queue de la chaîne
+ */
+std::string& rtrim(std::string &s)
+{
     s.erase(std::find_if(s.rbegin(), s.rend(), isNotSpace).base(), s.end());
     return s;
 }
 
-// Fonction pour supprimer les espaces en tête et en queue de la chaîne
-std::string& trim(std::string &s) {
+/**
+ * @brief Fonction pour supprimer les espaces en tête et en queue de la chaîne
+ */
+std::string& trim(std::string &s)
+{
     return ltrim(rtrim(s));
 }
 
@@ -98,9 +110,7 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
 
             /* Extract the date and rate from the line */
             if (std::getline(ss, date, ',') && (ss >> rate))
-            {
                 _exchangeRates[date] = rate;
-            }
         }
     }
     

@@ -6,12 +6,12 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:54:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 18:01:00 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:07:01 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion de la classe BitcoinExchange */
-#include "BitcoinExchange.hpp"
+#include "../incs/BitcoinExchange.hpp"
 
 /**
  * @brief Fonction main

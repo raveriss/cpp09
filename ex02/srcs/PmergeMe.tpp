@@ -1,19 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.tpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
+/*   Updated: 2024/06/27 22:24:58 by raveriss         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* Include the standard library for std::cout */
 #include <iostream>
+
+/* Include the standard library for std::vector */
 #include <vector>
+
+/* Include the standard library for std::deque */
 #include <deque>
+
+/* Include the standard library for std::iterator */
 #include <iterator>
 
-// Fonction pour imprimer le contenu d'un conteneur
+/**
+ * @brief Print the content of a container
+ */
 template <typename Iterator>
-void printContainer(Iterator begin, Iterator end) {
-    for (Iterator it = begin; it != end; ++it) {
+void printContainer(Iterator begin, Iterator end)
+{
+    for (Iterator it = begin; it != end; ++it)
+	{
         std::cout << *it << " ";
     }
     std::cout << std::endl;
 }
 
+/**
+ * @brief Merge two halves of a container
+ */
 template <typename ContainerType>
-void merge(typename ContainerType::iterator iterBegin, typename ContainerType::iterator iterMid, typename ContainerType::iterator iterEnd) {
+void merge(typename ContainerType::iterator iterBegin, typename ContainerType::iterator iterMid, typename ContainerType::iterator iterEnd)
+{
     typedef typename ContainerType::value_type ValueType;
 
     std::vector<ValueType> leftSubArray(iterBegin, iterMid + 1);
@@ -32,11 +59,15 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
     printContainer(iterBegin, iterEnd + 1);
 
 
-    while (iterLeft != leftSubArray.end() && iterRight != rightSubArray.end()) {
-        if (*iterLeft <= *iterRight) {
+    while (iterLeft != leftSubArray.end() && iterRight != rightSubArray.end())
+	{
+        if (*iterLeft <= *iterRight)
+		{
             *iterMerge = *iterLeft;
             ++iterLeft;
-        } else {
+        }
+		else
+		{
             *iterMerge = *iterRight;
             ++iterRight;
         }
@@ -51,13 +82,15 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
         printContainer(iterBegin, iterEnd + 1);
     }
 
-    while (iterLeft != leftSubArray.end()) {
+    while (iterLeft != leftSubArray.end())
+	{
         *iterMerge = *iterLeft;
         ++iterLeft;
         ++iterMerge;
     }
 
-    while (iterRight != rightSubArray.end()) {
+    while (iterRight != rightSubArray.end())
+	{
         *iterMerge = *iterRight;
         ++iterRight;
         ++iterMerge;
@@ -68,15 +101,21 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
     printContainer(iterBegin, iterEnd + 1);
 }
 
+/**
+ * @brief Insertion sort
+ */
 template <typename Container>
-void insertionSort(typename Container::iterator begin, typename Container::iterator end) {
+void insertionSort(typename Container::iterator begin, typename Container::iterator end)
+{
     typename Container::iterator current;
 
-    for (current = begin + 1; current <= end; ++current) {
+    for (current = begin + 1; current <= end; ++current)
+	{
         typename Container::value_type currentValue = *current;
         typename Container::iterator previous = current;
 
-        while (previous > begin && *(previous - 1) > currentValue) {
+        while (previous > begin && *(previous - 1) > currentValue)
+		{
             *previous = *(previous - 1);
             --previous;
         }
@@ -84,13 +123,20 @@ void insertionSort(typename Container::iterator begin, typename Container::itera
     }
 }
 
+/**
+ * @brief Merge Insertion Sort Helper
+ */
 template <typename T>
-void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right) {
-    if (std::distance(left, right) <= 10) {
+void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
+{
+    if (std::distance(left, right) <= 10)
+	{
         insertionSort<T>(left, right);
-        std::cout << "Insertion Sort: ";
+        std::cout << "Ford-Johnson Sort: ";
         printContainer(left, right + 1);
-    } else {
+    }
+	else
+	{
         typename T::iterator mid = left + std::distance(left, right) / 2;
 
         std::cout << std::endl;
@@ -109,13 +155,18 @@ void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::
 
         merge<T>(left, mid, right);
 
-        std::cout << "\nAfter Merge:\n";
+        std::cout << "\nFord-Johnson Sort:\n";
         printContainer(left, right + 1);
-        std::cout << std::endl;
     }
 }
 
+/**
+ * @brief Merge Insertion Sort
+ */
 template <typename T>
-void mergeInsertSort(T& container) {
+void mergeInsertSort(T& container)
+{
     mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }
+
+/* PMERGEME_TPP */
