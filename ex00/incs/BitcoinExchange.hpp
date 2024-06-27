@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:59 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 02:02:46 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:16:51 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@
 
 /* Inclusion de la bibliothèque standard pour std::cout */
 #include <iostream>
+
+/* Inclusion de la bibliothèque standard pour std::find_if */
+#include <algorithm>
+
+/* Inclusion de la bibliothèque standard pour std::isspace */
+#include <cctype>
 
 /* Define values */
 #define RETURN_SUCCESS 0

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 17:00:43 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/27 19:27:04 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,28 @@ BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other)
 BitcoinExchange::~BitcoinExchange()
 {}
 
+// Fonction pour vérifier si un caractère est un espace blanc
+bool isNotSpace(char ch) {
+    return !std::isspace(static_cast<unsigned char>(ch));
+}
+
+// Fonction pour supprimer les espaces en tête de la chaîne
+std::string& ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), isNotSpace));
+    return s;
+}
+
+// Fonction pour supprimer les espaces en queue de la chaîne
+std::string& rtrim(std::string &s) {
+    s.erase(std::find_if(s.rbegin(), s.rend(), isNotSpace).base(), s.end());
+    return s;
+}
+
+// Fonction pour supprimer les espaces en tête et en queue de la chaîne
+std::string& trim(std::string &s) {
+    return ltrim(rtrim(s));
+}
+
 /**
  * @brief Charge la base de données data.csv
  */
@@ -76,7 +98,9 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
 
             /* Extract the date and rate from the line */
             if (std::getline(ss, date, ',') && (ss >> rate))
+            {
                 _exchangeRates[date] = rate;
+            }
         }
     }
     
@@ -97,104 +121,106 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
  */
 void BitcoinExchange::processInput(const std::string & filename)
 {
-	/* Ouvre le fichier input.txt */
+    /* Ouvre le fichier input.txt */
     std::ifstream file(filename.c_str());
 
-	/* Vérifie si le fichier a été ouvert avec succès */
+    /* Vérifie si le fichier a été ouvert avec succès */
     if (!file)
         throw std::runtime_error("Error: could not open file.");
 
-	/* Déclare des variables de type string */
-    std::string line, date, valueStr;
+    /* Déclare des variables de type string */
+    std::string inputLine, datePart, valuePart;
 
-	/* Déclare une variable de type double */
+    /* Déclare une variable de type double */
     double value;
 
     /* Declare a boolean headerPresent */
     bool headerPresent = false;
 
-    /* Check if the first line contains header */
-    if (std::getline(file, line))
+    /* Read the file line by line */
+    bool firstLine = true;
+    while (getline(file, inputLine))
     {
-        /* Check if the first line is "date,exchange_rate" */
-        if (line == "date,exchange_rate")
-            headerPresent = true;
+        trim(inputLine);
         
-        else
+        // std::cout << inputLine << std::endl;
+        if (firstLine)
         {
-            /* Process the first line as a valid data line */
-            std::istringstream ss(line);
-            if (std::getline(ss, date, ',') && (ss >> value))
-                _exchangeRates[date] = value;
+            
+            /* Check if the first line is "date | value" */
+            if (inputLine == "date | value")
+            {
+                headerPresent = true;
+                firstLine = false;
+                continue;
+            }
         }
-    }
+        
+        firstLine = false;
 
-	/* Read the file line by line */
-    while (getline(file, line))
-    {
-		/* Create a stringstream from the line */
-        std::stringstream ss(line);
-		
-		/* Check if the line is of the form "date | value" */
-		if (line[11] != '|' || line[10] != ' ' || line[12] != ' ' )
-		{
-			line = line.empty() ? "empty" : line;
-			std::cout << "Error: bad input => " << line << std::endl;
-			continue;
-		}
-
-		/* Extract the date and value from the line */
-        if (getline(ss, date, '|'))
+        /* Create a stringstream from the line */
+        std::stringstream ss(inputLine);
+        
+        /* Check if the line is of the form "date | value" */
+        if (inputLine[11] != '|' || inputLine[10] != ' ' || inputLine[12] != ' ' )
         {
-			/* Extract the value from the stringstream */
-            if (!getline(ss, valueStr))
+            inputLine = inputLine.empty() ? "empty" : inputLine;
+            std::cout << "Error: bad input => " << inputLine << std::endl;
+            continue;
+        }
+
+        /* Extract the date and value from the inputLine */
+        if (getline(ss, datePart, '|'))
+        {
+            /* Extract the value from the stringstream */
+            if (!getline(ss, valuePart))
             {
-                std::cout << "Error: bad input => " << line << std::endl;
+                std::cout << "Error: bad input => " << inputLine << std::endl;
                 continue;
             }
-			/* Erase trailing whitespace */
-            date.erase(date.find_last_not_of(" \n\r\t") + 1);
-			
-			/* Erase leading whitespace */
-            valueStr.erase(0, valueStr.find_first_not_of(" \n\r\t"));
-			
-			/* Check if the date is valid */
-            if (!isValidDate(date))
+            /* Erase trailing whitespace */
+            datePart.erase(datePart.find_last_not_of(" \n\r\t") + 1);
+            
+            /* Erase leading whitespace */
+            valuePart.erase(0, valuePart.find_first_not_of(" \n\r\t"));
+            
+            /* Check if the date is valid */
+            if (!isValidDate(datePart))
             {
-                std::cout << "Error: bad input => " << date << std::endl;
+                std::cout << "Error: bad input => " << datePart << std::endl;
                 continue;
             }
 
-			/* Check if the value is valid */
-            if (!isValidValue(valueStr))
+            /* Check if the value is valid */
+            if (!isValidValue(valuePart))
             {
                 std::cout << "Error: not a positive number." << std::endl;
                 continue;
             }
 
-			/* Convert the string to a double */
-            value = atof(valueStr.c_str());
+            /* Convert the string to a double */
+            value = atof(valuePart.c_str());
 
-			/* check if the value is greater than 1000 */
+            /* check if the value is greater than 1000 */
             if (value > 1000)
             {
                 std::cout << "Error: too large a number." << std::endl;
                 continue;
             }
 
-			/* Get the exchange rate for the date */
-            double rate = getExchangeRate(date);
-            std::cout << date << " => " << value << " = " << value * rate << std::endl;
+            /* Get the exchange rate for the date */
+            double rate = getExchangeRate(datePart);
+            std::cout << datePart << " => " << value << " = " << value * rate << std::endl;
         }
-
         else
         {
-			/* If the date could not be extracted, print an error message */
-			line = line.empty() ? "empty" : line;
-            std::cout << "Error: bad input => " << line << std::endl;
+            /* If the date could not be extracted, print an error message */
+            inputLine = inputLine.empty() ? "empty" : inputLine;
+            std::cout << "Error: bad input => " << inputLine << std::endl;
         }
     }
 }
+
 
 /**
  * @brief Récupère le taux de change
