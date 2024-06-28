@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:45:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/24 18:27:11 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:35:30 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 
 /* Inclusion de la bibliothèque standard pour std::string */
 #include <string>
+
+#include <cmath> // For using the floor function
+
+#include <iomanip>
 
 /* Define values */
 #define RETURN_SUCCESS 0
@@ -50,18 +54,22 @@ class RPN
         ~RPN();
 
         /* Fonction pour évaluer l'expression */
-        int evaluate(const std::string & expression);
+        double evaluate(const std::string & expression);
 
     private:
 
         /* Pile d'entiers */
-        std::stack<int> _stack;
+        std::stack<double> _stack;
 
         /** Function to check if a token is an operator */
         bool isOperator(const std::string & token);
         
         /** Function to perform an operation */
-        int performOperation(const std::string & operation, int operand1, int operand2);
+        double performOperation(const std::string & operation, double operand1, double operand2);
+
+        /** Function to validate the expression */
+        void validateExpression(const std::string & expression);
+
 };
 
 /* RPN_HPP */
