@@ -52,6 +52,8 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "*.tpp": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "cstring": "cpp",
+        "cinttypes": "cpp"
     }
 }

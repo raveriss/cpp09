@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 22:24:58 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:18:57 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,35 +129,37 @@ void insertionSort(typename Container::iterator begin, typename Container::itera
 template <typename T>
 void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
 {
-    if (std::distance(left, right) <= 10)
-	{
+    // if (std::distance(left, right) <= 10)
+	// {
+    (void)container;
         insertionSort<T>(left, right);
-        std::cout << "Ford-Johnson Sort: ";
+
+        std::cout << BRIGHT_BLUE <<"\nFord-Johnson Sort" << NC << " : " << NC;
         printContainer(left, right + 1);
-    }
-	else
-	{
-        typename T::iterator mid = left + std::distance(left, right) / 2;
+    // }
+	// else
+	// {
+    //     typename T::iterator mid = left + std::distance(left, right) / 2;
 
-        std::cout << std::endl;
-        std::cout << "\nBefore Left Recursion: ";
-        printContainer(left, mid + 1);
+    //     std::cout << std::endl;
+    //     std::cout << "\nBefore Left Recursion: ";
+    //     printContainer(left, mid + 1);
 
-        std::cout << "Before Right Recursion: ";
-        printContainer(mid + 1, right + 1);
+    //     std::cout << "Before Right Recursion: ";
+    //     printContainer(mid + 1, right + 1);
         
-        std::cout << std::endl;
+    //     std::cout << std::endl;
 
-        mergeInsertSortHelper(container, left, mid);
-        mergeInsertSortHelper(container, mid + 1, right);
+    //     mergeInsertSortHelper(container, left, mid);
+    //     mergeInsertSortHelper(container, mid + 1, right);
 
-        std::cout << std::endl;
+    //     std::cout << std::endl;
 
-        merge<T>(left, mid, right);
+    //     merge<T>(left, mid, right);
 
-        std::cout << "\nFord-Johnson Sort:\n";
-        printContainer(left, right + 1);
-    }
+    //     std::cout << "\nFord-Johnson Sort:\n";
+    //     printContainer(left, right + 1);
+    // }
 }
 
 /**
