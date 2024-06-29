@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:54:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 22:07:01 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:51:01 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
     /* Vérification si le nombre d'arguments est exactement 2 */
     if (argc != EXPECTED_ARGC)
     {
-        std::cerr << "Usage: ./btc input.txt" << std::endl;
+        std::cerr << RED_BG << "Usage: ./btc input.txt" << NC << std::endl;
         return RETURN_FAILURE;
     }
 

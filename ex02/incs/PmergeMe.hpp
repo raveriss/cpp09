@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 19:18:19 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:06:22 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 /* Inclusion de la bibliothèque standard pour std::cstring */
 #include <cstring>
+
+#include <sstream>
 
 /* Define values */
 #define RETURN_SUCCESS 0

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/27 22:06:45 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:42:57 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,11 @@ void BitcoinExchange::loadDatabase(const std::string & filename)
 	/* Déclare une variable de type double */
     double rate;
 
-    /* Declare a boolean headerPresent */
-    bool headerPresent = false;
-
     /* Check if the first line contains header */
     if (std::getline(file, line))
     {
         /* Check if the first line is "date,exchange_rate" */
-        if (line == "date,exchange_rate")
-            headerPresent = true;
-        else
+        if (line != "date,exchange_rate")
         {
             /* Create a stringstream from the line */
             std::istringstream ss(line);
@@ -144,9 +139,6 @@ void BitcoinExchange::processInput(const std::string & filename)
     /* Déclare une variable de type double */
     double value;
 
-    /* Declare a boolean headerPresent */
-    bool headerPresent = false;
-
     /* Read the file line by line */
     bool firstLine = true;
     while (getline(file, inputLine))
@@ -160,7 +152,6 @@ void BitcoinExchange::processInput(const std::string & filename)
             /* Check if the first line is "date | value" */
             if (inputLine == "date | value")
             {
-                headerPresent = true;
                 firstLine = false;
                 continue;
             }

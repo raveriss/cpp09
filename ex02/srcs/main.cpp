@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 21:22:03 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 22:19:06 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,26 @@ bool isPositiveInteger(const std::string& str)
     return !str.empty();
 }
 
+std::string formatWithSpaces(int number, int maxWidth)
+{
+    std::ostringstream oss;
+    oss << number;
+    std::string str = oss.str();
+    int numSpaces = maxWidth - str.length();
+    for (int i = 0; i < numSpaces; ++i)
+    {
+        str = " " + str;
+    }
+    return str;
+}
+
+std::string intToString(int number)
+{
+    std::ostringstream oss;
+    oss << number;
+    return oss.str();
+}
+
 /**
  * @brief Main function
  */
@@ -53,27 +73,31 @@ int main(int argc, char* argv[])
         return RETURN_FAILURE;
     }
 
-    // else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
-    // {
-    //     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
-    //     std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
-    //     std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */\n" << NC << std::endl;
+    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+    {
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
+        std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
+        std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 
-    //     std::clock_t start_On = std::clock();
-    //     getSum_On(10000000);
-    //     std::clock_t end_On = std::clock();
-    //     double duration_On = 1000000.0 * (end_On - start_On) / CLOCKS_PER_SEC;
+        std::clock_t start_On = std::clock();
+        getSum_On(10000000);
+        std::clock_t end_On = std::clock();
+        double duration_On = 1000000.0 * (end_On - start_On) / CLOCKS_PER_SEC;
     
-    //     std::clock_t start_O1 = std::clock();
-    //     getSum_O1(5);
-    //     std::clock_t end_O1 = std::clock();
-    //     double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
+        std::clock_t start_O1 = std::clock();
+        getSum_O1(5);
+        std::clock_t end_O1 = std::clock();
+        double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
 
-    //     std::cout << "Time to process a range of " << 5 << " n with getSum_On " 
-    //           << duration_On << " us" << std::endl;
-    //     std::cout << "Time to process a range of " << 5 << " n with getSum_O1 " 
-    //         << duration_O1 << " us" << std::endl;
-    // }
+        const char* OnColor = (duration_On <= duration_O1) ? GREEN_BG : RED_BG;
+        const char* O1Color = (duration_O1 <= duration_On) ? GREEN_BG : RED_BG;
+
+        int maxWidth = std::max(intToString(duration_On).length(), intToString(duration_O1).length());
+
+        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << "10000000" << " elements with std::\n" << OnColor << " getSum_On " 
+                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " us" << std::endl;
+        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " us" << std::endl << std::endl;
+    }
     
     else
     {
@@ -138,9 +162,11 @@ int main(int argc, char* argv[])
         const char* vectorColor = (durationVector <= durationDeque) ? GREEN_BG : RED_BG;
         const char* dequeColor = (durationDeque <= durationVector) ? GREEN_BG : RED_BG;
 
+        int maxWidth = std::max(intToString(durationVector).length(), intToString(durationDeque).length());
+
         std::cout << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
-                << NC << ": " << durationVector << " us" << std::endl;
-        std::cout << dequeColor << " deque " << NC << ": " << durationDeque << " us" << std::endl << std::endl;
+                << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
+        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
     }
     return RETURN_SUCCESS;
 }
