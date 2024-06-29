@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:45:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/28 14:35:30 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:23:42 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 /* Inclusion de la bibliothèque standard pour std::string */
 #include <string>
 
-#include <cmath> // For using the floor function
+/* Include the standard library for std::floor */
+#include <cmath>
 
+/* Include the standard library for std::setprecision */
 #include <iomanip>
 
 /* Define values */

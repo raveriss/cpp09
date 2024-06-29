@@ -6,14 +6,16 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 22:19:06 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:07:14 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* Inclusion of the PmergeMe header file */
 #include "../incs/PmergeMe.hpp"
 
-
+/**
+ * @brief Get the sum of the numbers from 1 to n with O(n) complexity
+ */
 long long int getSum_On(int n)
 {
     long long int sum = 0; // Déclaration de sum en dehors de la boucle
@@ -23,7 +25,10 @@ long long int getSum_On(int n)
     }
     return sum;
 }
-    
+
+/**
+ * @brief Get the sum of the numbers from 1 to n with O(1) complexity
+ */
 long long int getSum_O1(int n)
 {
     return n * (n + 1) / 2;
@@ -42,6 +47,9 @@ bool isPositiveInteger(const std::string& str)
     return !str.empty();
 }
 
+/**
+ * @brief Format a number with spaces
+ */
 std::string formatWithSpaces(int number, int maxWidth)
 {
     std::ostringstream oss;
@@ -55,6 +63,9 @@ std::string formatWithSpaces(int number, int maxWidth)
     return str;
 }
 
+/**
+ * @brief Convert an integer to a string
+ */
 std::string intToString(int number)
 {
     std::ostringstream oss;

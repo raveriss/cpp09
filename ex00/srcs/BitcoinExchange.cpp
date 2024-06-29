@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 22:42:57 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:21:07 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ void BitcoinExchange::processInput(const std::string & filename)
         }
     }
 }
-
 
 /**
  * @brief Récupère le taux de change

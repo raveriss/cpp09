@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/28 14:34:44 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:30:00 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ double RPN::performOperation(const std::string & operation, double operand1, dou
 	throw std::runtime_error("Invalid operator");
 }
 
+/**
+ * @brief Function to validate the expression
+ */
 void RPN::validateExpression(const std::string & expression)
 {
     for (size_t i = 0; i < expression.size(); ++i)
@@ -95,9 +98,7 @@ double RPN::evaluate(const std::string & expression)
 	{
 		
         if (token.find(',') != std::string::npos)
-        {
-            throw std::runtime_error("Error: Invalid character ',' in expression. Use '.' for decimal points.");
-        }		
+            throw std::runtime_error("Error: Invalid character ',' in expression. Use '.' for decimal points.");	
 		
 		if (isdigit(token[0]))
 		{

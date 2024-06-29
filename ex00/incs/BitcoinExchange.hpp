@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:59 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 22:46:39 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:27:31 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@
 #define CYAN        "\033[0;36m"
 #define WHITE       "\033[0;37m"
 
+/* Definitions of ANSI bright color codes for console output */
 #define BRIGHT_GREY    "\033[1;30m"
 #define BRIGHT_RED     "\033[1;31m"
 #define BRIGHT_GREEN   "\033[1;32m"
@@ -94,6 +95,7 @@
 #define BRIGHT_CYAN    "\033[1;36m"
 #define BRIGHT_WHITE   "\033[1;37m"
 
+/* Definitions of ANSI background color codes for console output */
 #define BLACK_BG       "\033[40m"
 #define RED_BG         "\033[41m"
 #define GREEN_BG       "\033[42m"
@@ -103,6 +105,7 @@
 #define CYAN_BG        "\033[46m"
 #define WHITE_BG       "\033[47m"
 
+/* Definitions of ANSI text style codes for console output */
 #define BOLD           "\033[1m"
 #define UNDERLINE      "\033[4m"
 #define RESET          "\033[0m"

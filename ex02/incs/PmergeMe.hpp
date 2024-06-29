@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 22:06:22 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/29 23:26:50 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 /* Inclusion de la bibliothèque standard pour std::cstring */
 #include <cstring>
 
+/* Inclusion de la bibliothèque standard pour std::ostringstream */
 #include <sstream>
 
 /* Define values */
@@ -60,6 +61,7 @@
 #define CYAN        "\033[0;36m"
 #define WHITE       "\033[0;37m"
 
+/* Definitions of ANSI bright color codes for console output */ 
 #define BRIGHT_GREY    "\033[1;30m"
 #define BRIGHT_RED     "\033[1;31m"
 #define BRIGHT_GREEN   "\033[1;32m"
@@ -69,6 +71,7 @@
 #define BRIGHT_CYAN    "\033[1;36m"
 #define BRIGHT_WHITE   "\033[1;37m"
 
+/* Definitions of ANSI background color codes for console output */
 #define BLACK_BG       "\033[40m"
 #define RED_BG         "\033[41m"
 #define GREEN_BG       "\033[42m"
@@ -78,6 +81,7 @@
 #define CYAN_BG        "\033[46m"
 #define WHITE_BG       "\033[47m"
 
+/* Definitions of ANSI text style codes for console output */
 #define BOLD           "\033[1m"
 #define UNDERLINE      "\033[4m"
 #define RESET          "\033[0m"
@@ -91,6 +95,7 @@
 template <typename T>
 void mergeInsertSort(T &container);
 
+/* Inclusion du fichier template */
 #include "../srcs/PmergeMe.tpp"
 
 /* PMERGEME_HPP */
