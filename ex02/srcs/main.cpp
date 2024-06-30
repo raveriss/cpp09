@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 23:07:14 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:24:35 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,13 +137,25 @@ int main(int argc, char* argv[])
         }
 
         if (data.size() > 26)
+        {
             std::cout << std::endl;
+        }
 
         /* Measure time for std::vector */
         std::clock_t startVector = std::clock();
         mergeInsertSort(data);
         std::clock_t endVector = std::clock();
         double durationVector = 1000000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
+
+        std::cout << BRIGHT_BLUE << "\nAfter" << NC << " : ";
+        for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+
+        if (data.size() > 26 || deq.size() <= 10)
+            std::cout << std::endl;
+        
 
         /* Measure time for std::deque */
         std::cout << CYAN <<  "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
@@ -156,17 +168,33 @@ int main(int argc, char* argv[])
             std::cout << *it << " ";
         }
 
-        if (deq.size() > 26)
+        if (deq.size() > 26 || deq.size() > 10)
+        {
             std::cout << std::endl;
+        }
         std::clock_t startDeque = std::clock();
         mergeInsertSort(deq);
         std::clock_t endDeque = std::clock();
         double durationDeque = 1000000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
+            
+        if (deq.size() > 26 || deq.size() <= 10)
+        {
+            std::cout << std::endl;
+        }
 
-        std::cout << std::endl;
+        std::cout << BRIGHT_BLUE << "After" << NC << " : ";
+        for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it)
+        {
+            std::cout << *it << " ";
+        }
+
+        if (deq.size() > 26 || deq.size() <= 10)
+        {
+            std::cout << std::endl;
+        }
 
         /* Measure time for std::deque */
-        std::cout << CYAN <<  "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
+        std::cout << CYAN <<  "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
         std::cout << CYAN << "/*                                  RESULTAT                                 */\n" << NC;
         std::cout << CYAN << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
 
@@ -175,7 +203,7 @@ int main(int argc, char* argv[])
 
         int maxWidth = std::max(intToString(durationVector).length(), intToString(durationDeque).length());
 
-        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
+        std::cout  << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
                 << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
         std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
     }

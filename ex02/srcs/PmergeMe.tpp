@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 23:30:30 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:53:53 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,6 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
     typename std::vector<ValueType>::iterator iterRight = rightSubArray.begin();
     typename ContainerType::iterator iterMerge = iterBegin;
 
-    std::cout << "Initial state:\n";
-    std::cout << "leftSubArray: ";
-    printContainer(leftSubArray.begin(), leftSubArray.end());
-    std::cout << "rightSubArray: ";
-    printContainer(rightSubArray.begin(), rightSubArray.end());
-    std::cout << "iterMerge (original container): ";
-    printContainer(iterBegin, iterEnd + 1);
-
     while (iterLeft != leftSubArray.end() && iterRight != rightSubArray.end())
 	{
         if (*iterLeft <= *iterRight)
@@ -71,14 +63,6 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
             ++iterRight;
         }
         ++iterMerge;
-
-        std::cout << "\nDuring merge:\n";
-        std::cout << "iterLeft: ";
-        printContainer(iterLeft, leftSubArray.end());
-        std::cout << "iterRight: ";
-        printContainer(iterRight, rightSubArray.end());
-        std::cout << "iterMerge (original container): ";
-        printContainer(iterBegin, iterEnd + 1);
     }
 
     while (iterLeft != leftSubArray.end())
@@ -94,10 +78,6 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
         ++iterRight;
         ++iterMerge;
     }
-
-    std::cout << "After merge:\n";
-    std::cout << "iterMerge (original container): ";
-    printContainer(iterBegin, iterEnd + 1);
 }
 
 /**
@@ -128,37 +108,19 @@ void insertionSort(typename Container::iterator begin, typename Container::itera
 template <typename T>
 void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
 {
-    // if (std::distance(left, right) <= 10)
-	// {
-    (void)container;
+    if (std::distance(left, right) <= 10)
+	{
         insertionSort<T>(left, right);
+    }
+	else
+	{
+        typename T::iterator mid = left + std::distance(left, right) / 2;
 
-        std::cout << BRIGHT_BLUE <<"\nFord-Johnson Sort" << NC << " : " << NC;
-        printContainer(left, right + 1);
-    // }
-	// else
-	// {
-    //     typename T::iterator mid = left + std::distance(left, right) / 2;
+        mergeInsertSortHelper(container, left, mid);
+        mergeInsertSortHelper(container, mid + 1, right);
 
-    //     std::cout << std::endl;
-    //     std::cout << "\nBefore Left Recursion: ";
-    //     printContainer(left, mid + 1);
-
-    //     std::cout << "Before Right Recursion: ";
-    //     printContainer(mid + 1, right + 1);
-        
-    //     std::cout << std::endl;
-
-    //     mergeInsertSortHelper(container, left, mid);
-    //     mergeInsertSortHelper(container, mid + 1, right);
-
-    //     std::cout << std::endl;
-
-    //     merge<T>(left, mid, right);
-
-    //     std::cout << "\nFord-Johnson Sort:\n";
-    //     printContainer(left, right + 1);
-    // }
+        merge<T>(left, mid, right);
+    }
 }
 
 /**
