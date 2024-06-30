@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/30 14:53:21 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:57:34 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int main(int argc, char* argv[])
         int maxWidth = std::max(intToString(duration_On).length(), intToString(duration_O1).length());
 
         std::cout << BRIGHT_MAGENTA << "Time to process a range of " << "10000000" << " elements with std::\n" << OnColor << " getSum_On " 
-                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " μs" << std::endl;
-        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " μs" << std::endl << std::endl;
+                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " us" << std::endl;
+        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " us" << std::endl << std::endl;
     }
     
     else
@@ -204,8 +204,8 @@ int main(int argc, char* argv[])
         int maxWidth = std::max(intToString(durationVector).length(), intToString(durationDeque).length());
 
         std::cout  << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
-                << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " μs" << std::endl;
-        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " μs" << std::endl << std::endl;
+                << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
+        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
     }
     return RETURN_SUCCESS;
 }
