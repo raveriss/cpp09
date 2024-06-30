@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/30 14:24:35 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:53:21 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /**
  * @brief Get the sum of the numbers from 1 to n with O(n) complexity
  */
-long long int getSum_On(int n)
+long long int getSum_On(long n)
 {
     long long int sum = 0; // Déclaration de sum en dehors de la boucle
     for (int number = 1; number <= n; ++number)
@@ -29,7 +29,7 @@ long long int getSum_On(int n)
 /**
  * @brief Get the sum of the numbers from 1 to n with O(1) complexity
  */
-long long int getSum_O1(int n)
+long long int getSum_O1(long n)
 {
     return n * (n + 1) / 2;
 }
@@ -91,12 +91,12 @@ int main(int argc, char* argv[])
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 
         std::clock_t start_On = std::clock();
-        getSum_On(10000000);
+        getSum_On(1000000000);
         std::clock_t end_On = std::clock();
         double duration_On = 1000000.0 * (end_On - start_On) / CLOCKS_PER_SEC;
     
         std::clock_t start_O1 = std::clock();
-        getSum_O1(5);
+        getSum_O1(1000000000);
         std::clock_t end_O1 = std::clock();
         double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
 
@@ -106,8 +106,8 @@ int main(int argc, char* argv[])
         int maxWidth = std::max(intToString(duration_On).length(), intToString(duration_O1).length());
 
         std::cout << BRIGHT_MAGENTA << "Time to process a range of " << "10000000" << " elements with std::\n" << OnColor << " getSum_On " 
-                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " us" << std::endl;
-        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " us" << std::endl << std::endl;
+                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " μs" << std::endl;
+        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " μs" << std::endl << std::endl;
     }
     
     else
@@ -204,8 +204,8 @@ int main(int argc, char* argv[])
         int maxWidth = std::max(intToString(durationVector).length(), intToString(durationDeque).length());
 
         std::cout  << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
-                << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
-        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
+                << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " μs" << std::endl;
+        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " μs" << std::endl << std::endl;
     }
     return RETURN_SUCCESS;
 }
