@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 23:21:07 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/01 13:41:15 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,11 @@ void BitcoinExchange::processInput(const std::string & filename)
     bool firstLine = true;
     while (getline(file, inputLine))
     {
-        trim(inputLine);
-        
-        // std::cout << inputLine << std::endl;
+        /* Dans l'eventualite ou nous desirons avoir un parsing flexible */
+        /* trim(inputLine); */
         if (firstLine)
         {
-            
+            trim(inputLine);
             /* Check if the first line is "date | value" */
             if (inputLine == "date | value")
             {
@@ -163,7 +162,7 @@ void BitcoinExchange::processInput(const std::string & filename)
         std::stringstream ss(inputLine);
         
         /* Check if the line is of the form "date | value" */
-        if (inputLine[11] != '|' || inputLine[10] != ' ' || inputLine[12] != ' ' )
+        if (inputLine[11] != '|' || inputLine[10] != ' ' || inputLine[12] != ' ' || !isdigit(inputLine[9]) || !isdigit(inputLine[13]))
         {
             inputLine = inputLine.empty() ? "empty" : inputLine;
             std::cout << "Error: bad input => " << inputLine << std::endl;
