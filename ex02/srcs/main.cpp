@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:49:43 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:30:52 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  */
 long long int getSum_On(long n)
 {
-    long long int sum = 0; // Déclaration de sum en dehors de la boucle
+    long long int sum = 0;
     for (int number = 1; number <= n; ++number)
     {
         sum += number;
@@ -73,12 +73,6 @@ std::string intToString(int number)
     return oss.str();
 }
 
-/* Macro for asserting test results and displaying appropriate messages */
-#define ASSERT_TEST(expression, message) \
-    if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
-    else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
-
-
 /**
  * @brief Main function
  */
@@ -128,10 +122,13 @@ int main(int argc, char* argv[])
                 std::cerr << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << std::endl;
                 return RETURN_FAILURE;
             }
+
             int num = std::atoi(argv[i]);
+
             data.push_back(num);
             deq.push_back(num);
         }
+        
         std::cout << CYAN << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
         std::cout << CYAN << "/*                                  VECTOR                                   */\n" << NC;
         std::cout << CYAN << "/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
@@ -143,9 +140,7 @@ int main(int argc, char* argv[])
         }
 
         if (data.size() > 26)
-        {
             std::cout << std::endl;
-        }
 
         /* Measure time for std::vector */
         std::clock_t startVector = std::clock();
@@ -161,7 +156,6 @@ int main(int argc, char* argv[])
 
         if (data.size() > 26 || deq.size() <= 10)
             std::cout << std::endl;
-        
 
         /* Measure time for std::deque */
         std::cout << CYAN <<  "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;
@@ -175,18 +169,15 @@ int main(int argc, char* argv[])
         }
 
         if (deq.size() > 26 || deq.size() > 10)
-        {
             std::cout << std::endl;
-        }
+
         std::clock_t startDeque = std::clock();
         mergeInsertSort(deq);
         std::clock_t endDeque = std::clock();
         double durationDeque = 1000000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
             
         if (deq.size() > 26 || deq.size() <= 10)
-        {
             std::cout << std::endl;
-        }
 
         std::cout << BRIGHT_BLUE << "After" << NC << " : ";
         for (std::vector<int>::iterator it = data.begin(); it != data.end(); ++it)
@@ -195,9 +186,7 @@ int main(int argc, char* argv[])
         }
 
         if (deq.size() > 26 || deq.size() <= 10)
-        {
             std::cout << std::endl;
-        }
 
         /* Measure time for std::deque */
         std::cout << CYAN <<  "\n/*   -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'   */\n" << NC;

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:53:12 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:33:17 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@
 /* Include the standard library for std::iterator */
 #include <iterator>
 
-/* Function to print the content of a container */
+/**
+ * @brief Print the elements of a container
+ */
 template <typename Iterator>
 void printContainer(Iterator begin, Iterator end)
 {
@@ -33,7 +35,9 @@ void printContainer(Iterator begin, Iterator end)
     std::cout << std::endl;
 }
 
-/* Binary search function with detailed ASCII output */
+/**
+ * @brief Binary search
+ */
 template <typename Iterator, typename T>
 Iterator binarySearch(Iterator begin, Iterator end, const T& value)
 {
@@ -57,8 +61,10 @@ Iterator binarySearch(Iterator begin, Iterator end, const T& value)
  * @brief Insertion sort
  */
 template <typename Container>
-void insertionSort(typename Container::iterator begin, typename Container::iterator end) {
-    for (typename Container::iterator current = begin + 1; current <= end; ++current) {
+void insertionSort(typename Container::iterator begin, typename Container::iterator end)
+{
+    for (typename Container::iterator current = begin + 1; current <= end; ++current)
+    {
         typename Container::value_type currentValue = *current;
         typename Container::iterator insertPosition = binarySearch(begin, current, currentValue);
 
@@ -67,20 +73,22 @@ void insertionSort(typename Container::iterator begin, typename Container::itera
         // std::cout << "container value before insertion: ";
         // printContainer(begin, end + 1);
 
-
-        // Move elements and insert the current value
-        for (typename Container::iterator it = current; it != insertPosition; --it) {
+        /* Move elements and insert the current value */
+        for (typename Container::iterator it = current; it != insertPosition; --it)
+        {
             *it = *(it - 1);
         }
         *insertPosition = currentValue;
 
-        // Print the ASCII representation after moving elements
+        /* Print the ASCII representation after moving elements */
         // std::cout << "container value after insertion: ";
         // printContainer(begin, end + 1);
     }
 }
 
-/* Function to merge two halves of a container using binary search */
+/**
+ * @brief Merge
+ */
 template <typename ContainerType>
 void merge(typename ContainerType::iterator iterBegin, typename ContainerType::iterator iterMid, typename ContainerType::iterator iterEnd)
 {
@@ -120,10 +128,12 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
  * @brief Merge Insertion Sort Helper
  */
 template <typename T>
-void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right) {
-    if (std::distance(left, right) <= 1) {
+void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
+{
+    if (std::distance(left, right) <= 1)
         insertionSort<T>(left, right);
-    } else {
+    else
+    {
         typename T::iterator mid = left + std::distance(left, right) / 2;
 
         mergeInsertSortHelper(container, left, mid);
@@ -137,7 +147,8 @@ void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::
  * @brief Merge Insertion Sort
  */
 template <typename T>
-void mergeInsertSort(T& container) {
+void mergeInsertSort(T& container)
+{
     mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }
 
