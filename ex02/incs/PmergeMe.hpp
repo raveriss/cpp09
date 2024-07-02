@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 23:26:50 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:36:22 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,22 @@
 /* No Color */
 #define NC             RESET
 
-/**
- * @brief Fusionne deux moitiés d'un conteneur
- */
-template <typename T>
-void mergeInsertSort(T &container);
+class PmergeMe
+{
+    private:
+
+        /* Constructeur par défaut */
+        PmergeMe();
+
+        /* Constructeur par copie */
+        PmergeMe(const PmergeMe & other);
+
+        /* Opérateur d'affectation */
+        PmergeMe & operator = (const PmergeMe & other);
+
+        /* Destructeur */
+        ~PmergeMe();
+};
 
 /* Inclusion du fichier template */
 #include "../srcs/PmergeMe.tpp"

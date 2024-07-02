@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/30 14:57:34 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 20:49:43 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,12 @@ std::string intToString(int number)
     oss << number;
     return oss.str();
 }
+
+/* Macro for asserting test results and displaying appropriate messages */
+#define ASSERT_TEST(expression, message) \
+    if (expression) { std::cout << GREEN "[TEST PASSED]" << NC << " " << message << std::endl; } \
+    else { std::cout << RED "[TEST FAILED]" << NC << " " << message << std::endl; }
+
 
 /**
  * @brief Main function
@@ -207,6 +213,7 @@ int main(int argc, char* argv[])
                 << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
         std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
     }
+
     return RETURN_SUCCESS;
 }
 

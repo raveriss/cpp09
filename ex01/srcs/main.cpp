@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:46:19 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/01 13:14:55 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:21:47 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ bool isInteger(double value)
  */
 void printResult(double result)
 {
-    if (isInteger(result))
+    if (isInteger(result)) {
         std::cout << static_cast<int>(result) << std::endl;
-    else
+    } else {
         std::cout << std::fixed << std::setprecision(2) << result << std::endl;
+    }
 }
 
 /***
