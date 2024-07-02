@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:40:32 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 01:02:35 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,9 @@
 /* No Color */
 #define NC             RESET
 
+/**
+ * @brief Class PmergeMe
+ */
 class PmergeMe
 {
     private:
