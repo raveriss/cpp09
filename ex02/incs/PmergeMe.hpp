@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 20:36:22 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:40:32 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,4 @@ class PmergeMe
 /* Inclusion du fichier template */
 #include "../srcs/PmergeMe.tpp"
 
-/* PMERGEME_HPP */
+/* PmergeMe.hpp */

@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:33:17 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:40:10 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,4 +152,4 @@ void mergeInsertSort(T& container)
     mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }
 
-/* PMERGEME_TPP */
+/* PmergeMe.tpp */
