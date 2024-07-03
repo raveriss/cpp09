@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/03 12:35:26 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 20:42:19 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,9 +140,7 @@ void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::
         merge<T>(left, mid, right);
     }
     else
-    {
         insertionSort<T>(left, right);
-    }
 }
 
 /**
