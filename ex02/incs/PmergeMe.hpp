@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/03 01:02:35 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:11:30 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 /* Define values */
 #define RETURN_SUCCESS 0
 #define RETURN_FAILURE 1
-#define EXPECTED_ARGC 2
+#define EXPECTED_ARGC 3
 
 /* Define return values */
 #define ARG_ONE 2

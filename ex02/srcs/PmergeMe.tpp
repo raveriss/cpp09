@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:40:10 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:35:26 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,18 @@ void merge(typename ContainerType::iterator iterBegin, typename ContainerType::i
 template <typename T>
 void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::iterator right)
 {
-    if (std::distance(left, right) <= 1)
-        insertionSort<T>(left, right);
-    else
+    if (std::distance(left, right) > 1)
     {
         typename T::iterator mid = left + std::distance(left, right) / 2;
 
         mergeInsertSortHelper(container, left, mid);
-        mergeInsertSortHelper(container, mid + 1, right);
+        mergeInsertSortHelper(container, mid, right);
 
         merge<T>(left, mid, right);
+    }
+    else
+    {
+        insertionSort<T>(left, right);
     }
 }
 
@@ -147,7 +149,7 @@ void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::
  * @brief Merge Insertion Sort
  */
 template <typename T>
-void mergeInsertSort(T& container)
+void sortsFordJohnson(T& container)
 {
     mergeInsertSortHelper(container, container.begin(), container.end() - 1);
 }

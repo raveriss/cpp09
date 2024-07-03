@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:30:52 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 12:32:55 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ std::string intToString(int number)
  */
 int main(int argc, char* argv[])
 {
-    if (argc < EXPECTED_ARGC)
+    if (argc < EXPECTED_ARGC && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) != STRING_COMPARE_SUCCESS )
     {
         std::cerr << "Usage: " << argv[0] << " num1 num2 num3 ... numN or " << argv[0] << " tester" << std::endl;
         return RETURN_FAILURE;
@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 
         /* Measure time for std::vector */
         std::clock_t startVector = std::clock();
-        mergeInsertSort(data);
+        sortsFordJohnson(data);
         std::clock_t endVector = std::clock();
         double durationVector = 1000000.0 * (endVector - startVector) / CLOCKS_PER_SEC;
 
@@ -172,7 +172,7 @@ int main(int argc, char* argv[])
             std::cout << std::endl;
 
         std::clock_t startDeque = std::clock();
-        mergeInsertSort(deq);
+        sortsFordJohnson(deq);
         std::clock_t endDeque = std::clock();
         double durationDeque = 1000000.0 * (endDeque - startDeque) / CLOCKS_PER_SEC;
             
@@ -200,9 +200,9 @@ int main(int argc, char* argv[])
 
         std::cout  << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
                 << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
-        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl << std::endl;
+        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl;
     }
-
+    std::cout << NC;
     return RETURN_SUCCESS;
 }
 
