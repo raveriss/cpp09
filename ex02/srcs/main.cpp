@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/03 12:32:55 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/03 21:30:40 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,16 @@ int main(int argc, char* argv[])
         std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 
+        std::clock_t start_O1 = std::clock();
+        getSum_O1(1000000000);
+        std::clock_t end_O1 = std::clock();
+        double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
+
         std::clock_t start_On = std::clock();
         getSum_On(1000000000);
         std::clock_t end_On = std::clock();
         double duration_On = 1000000.0 * (end_On - start_On) / CLOCKS_PER_SEC;
     
-        std::clock_t start_O1 = std::clock();
-        getSum_O1(1000000000);
-        std::clock_t end_O1 = std::clock();
-        double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
 
         const char* OnColor = (duration_On <= duration_O1) ? GREEN_BG : RED_BG;
         const char* O1Color = (duration_O1 <= duration_On) ? GREEN_BG : RED_BG;
