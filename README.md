@@ -1,4 +1,3 @@
-![GitHub All Releases](https://img.shields.io/github/downloads/raveriss/cpp09/total)
 # cpp09 - École 42 | Paris
 
 ## Description
