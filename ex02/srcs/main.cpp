@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:10:47 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:22:15 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,8 @@ int main(int argc, char* argv[])
             long long verifie = std::strtoll(argv[i], NULL, 10);
 
             /* Vérifier si la valeur dépasse les limites autorisées */
-            if (verifie > INT_MAX) {
+            if (verifie > INT_MAX)
+            {
                 std::cerr << NC << RED_BG << "Error: Input value '" << argv[i] << "' exceeds the maximum allowed integer value (INT_MAX)." << NC << std::endl;
                 return RETURN_FAILURE;
             }

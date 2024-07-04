@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:06:00 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:19:38 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void BitcoinExchange::processInput(const std::string & filename)
 
     /* Read the file line by line */
     bool firstLine = true;
+
     while (getline(file, inputLine))
     {
         trim(inputLine);

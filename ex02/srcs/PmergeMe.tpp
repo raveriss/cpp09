@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:08:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 18:52:26 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:29:47 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ Iterator binarySearch(Iterator begin, Iterator end, const T& value)
         // std::cout << "Comparing " << value << " with " << *mid << std::endl;
         if (*mid == value)
             return mid;
+
         else if (*mid < value)
             left = mid + 1;
+
         else
             right = mid;
     }
@@ -136,6 +138,7 @@ void mergeInsertSortHelper(T& container, typename T::iterator left, typename T::
 {
     if (std::distance(left, right) <= 1)
         insertionSort<T>(left, right);
+
 	else
 	{
         typename T::iterator mid = left + std::distance(left, right) / 2;

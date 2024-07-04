@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/03 20:40:34 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:27:51 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,18 @@ double RPN::performOperation(const std::string & operation, double operand1, dou
 {
 	if (operation == "+")
 		return operand1 + operand2;
+
 	if (operation == "-")
 		return operand1 - operand2;
+
 	if (operation == "*")
 		return operand1 * operand2;
+
 	if (operation == "/")
 	{
 		if (operand2 == 0)
 			throw std::runtime_error("Error: Division by zero");
+
 		return operand1 / operand2;
 	}
 	throw std::runtime_error("Invalid operator");
@@ -94,7 +98,6 @@ double RPN::evaluate(const std::string & expression)
 
 	while (iss >> token)
 	{
-		
         if (token.find(',') != std::string::npos)
             throw std::runtime_error("Error: Invalid character ',' in expression. Use '.' for decimal points.");	
 		
@@ -105,6 +108,7 @@ double RPN::evaluate(const std::string & expression)
 			ss >> number;
 			_stack.push(number);
 		}
+
 		else if (isOperator(token))
 		{
 			if (_stack.size() < 2)
@@ -116,6 +120,7 @@ double RPN::evaluate(const std::string & expression)
 			double result = performOperation(token, operand1, operand2);
 			_stack.push(result);
 		}
+
 		else
 			throw std::runtime_error("Error");
 	}
