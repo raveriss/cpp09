@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 21:45:36 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 22:30:48 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@
 /* Inclusion de la bibliothèque standard pour std::ostringstream */
 #include <sstream>
 
-#include <climits> // pour INT_MAX
+/* Inclusion de la bibliothèque standard pour INT_MAX */
+#include <climits>
 
 /* Define values */
 #define RETURN_SUCCESS 0
