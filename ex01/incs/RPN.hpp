@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:45:49 by raveriss          #+#    #+#             */
-/*   Updated: 2024/06/29 23:23:42 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:01:16 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ class RPN
         /* Pile d'entiers */
         std::stack<double> _stack;
 
-        /** Function to check if a token is an operator */
+        /* Function to check if a token is an operator */
         bool isOperator(const std::string & token);
         
-        /** Function to perform an operation */
+        /* Function to perform an operation */
         double performOperation(const std::string & operation, double operand1, double operand2);
 
-        /** Function to validate the expression */
+        /* Function to validate the expression */
         void validateExpression(const std::string & expression);
 
 };
