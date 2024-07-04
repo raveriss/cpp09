@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 19:06:37 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:34:58 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,15 @@ int main(int argc, char* argv[])
                 return RETURN_FAILURE;
             }
 
+            // Convertir l'argument en entier long long
+            long long verifie = std::strtoll(argv[i], NULL, 10);
+
+            // Vérifier si la valeur dépasse les limites autorisées
+            if (verifie > INT_MAX) {
+                std::cerr << "Error: Input value '" << argv[i] << "' exceeds the maximum allowed integer value (INT_MAX)." << std::endl;
+                return RETURN_FAILURE;
+            }
+
             int num = std::atoi(argv[i]);
 
             data.push_back(num);
@@ -199,9 +208,9 @@ int main(int argc, char* argv[])
 
         int maxWidth = std::max(intToString(durationVector).length(), intToString(durationDeque).length());
 
-        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << vectorColor << " vector " 
+        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << data.size() << " elements with std::\n" << NC << vectorColor << " vector " 
                 << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
-        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << std::endl;
+        std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << NC << std::endl;
     }
     return RETURN_SUCCESS;
 }
