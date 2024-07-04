@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 19:33:02 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 21:45:36 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,11 @@
 
 /* Define return values */
 #define ARG_ONE 2
+#define ARG_TWO 3
 #define NO_ARGUMENTS 1
 #define RETURN_SUCCESS 0
 #define FIRST_ARGUMENT 1
+#define SECOND_ARGUMENT 2
 #define RETURN_FAILURE 1
 #define TEST_ARG "tester"
 #define STRING_COMPARE_SUCCESS 0

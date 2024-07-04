@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 19:34:58 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 22:24:04 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,37 +78,50 @@ std::string intToString(int number)
  */
 int main(int argc, char* argv[])
 {
-    if (argc < EXPECTED_ARGC && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) != STRING_COMPARE_SUCCESS )
+    if (argc < EXPECTED_ARGC || (argc > 3 && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == 0))
     {
-        std::cerr << "Usage: " << argv[0] << " num1 num2 num3 ... numN or " << argv[0] << " tester" << std::endl;
+        std::cerr << NC << RED_BG << "Usage: " << argv[0] << " num1 num2 ... numN or " << argv[0] << " tester num" << NC << std::endl;
         return RETURN_FAILURE;
     }
 
-    else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+    else if (argc == ARG_TWO && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
     {
+        if (!isPositiveInteger(argv[SECOND_ARGUMENT]))
+        {
+            std::cerr << NC << RED_BG << "Error: Invalid input '" << argv[SECOND_ARGUMENT] << "'. The input must be a positive integer." << NC <<std::endl;
+            return RETURN_FAILURE;
+        }
+
+        long long value = std::strtoll(argv[SECOND_ARGUMENT], NULL, 10);
+
+        if (value > INT_MAX)
+        {
+            std::cerr << NC << RED_BG << "Error: Input value '" << argv[SECOND_ARGUMENT] << "' exceeds the maximum allowed integer value (INT_MAX)." << NC << std::endl;
+            return RETURN_FAILURE;
+        }
+
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
         std::cout << CYAN << "/*                                 OPTIONNEL                                  */" << NC << std::endl;
         std::cout << CYAN << "/* -'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-',-'-,-'- */" << NC << std::endl;
 
         std::clock_t start_O1 = std::clock();
-        getSum_O1(100);
+        getSum_O1(value);
         std::clock_t end_O1 = std::clock();
         double duration_O1 = 1000000.0 * (end_O1 - start_O1) / CLOCKS_PER_SEC;
 
         std::clock_t start_On = std::clock();
-        getSum_On(100);
+        getSum_On(value);
         std::clock_t end_On = std::clock();
         double duration_On = 1000000.0 * (end_On - start_On) / CLOCKS_PER_SEC;
-    
 
         const char* OnColor = (duration_On <= duration_O1) ? GREEN_BG : RED_BG;
         const char* O1Color = (duration_O1 <= duration_On) ? GREEN_BG : RED_BG;
 
         int maxWidth = std::max(intToString(duration_On).length(), intToString(duration_O1).length());
 
-        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << "10000000" << " elements with std::\n" << OnColor << " getSum_On " 
-                << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " us" << std::endl;
-        std::cout << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " us" << std::endl << std::endl;
+        std::cout << BRIGHT_MAGENTA << "Time to process a range of " << value << " elements with std::\n" << NC << OnColor << " getSum_On "
+                  << NC << ": " << formatWithSpaces(duration_On, maxWidth) << " us" << std::endl;
+        std::cout << NC << O1Color << " getSum_O1 " << NC << ": " << formatWithSpaces(duration_O1, maxWidth) << " us" << std::endl << std::endl;
     }
     
     else
@@ -120,7 +133,7 @@ int main(int argc, char* argv[])
         {
             if (!isPositiveInteger(argv[i]))
             {
-                std::cerr << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << std::endl;
+                std::cerr << NC << RED_BG << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << NC << std::endl;
                 return RETURN_FAILURE;
             }
 
@@ -129,7 +142,7 @@ int main(int argc, char* argv[])
 
             // Vérifier si la valeur dépasse les limites autorisées
             if (verifie > INT_MAX) {
-                std::cerr << "Error: Input value '" << argv[i] << "' exceeds the maximum allowed integer value (INT_MAX)." << std::endl;
+                std::cerr << NC << RED_BG << "Error: Input value '" << argv[i] << "' exceeds the maximum allowed integer value (INT_MAX)." << NC << std::endl;
                 return RETURN_FAILURE;
             }
 
