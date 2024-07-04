@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 19:53:54 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:19:38 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:33:02 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ BitcoinExchange & BitcoinExchange::operator = (const BitcoinExchange & other)
 {
     if (this != &other)
         _exchangeRates = other._exchangeRates;
+
     return *this;
 }
 

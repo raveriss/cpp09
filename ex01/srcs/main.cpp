@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:46:19 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:28:43 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:32:37 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void printResult(double result)
 {
     if (isInteger(result))
         std::cout << static_cast<int>(result) << std::endl;
+
     else
         std::cout << std::fixed << std::setprecision(2) << result << std::endl;
 }
