@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:27:51 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:55:36 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void RPN::validateExpression(const std::string & expression)
     for (size_t i = 0; i < expression.size(); ++i)
     {
         char c = expression[i];
+
         if (!isdigit(c) && c != '.' && c != '+' && c != '-' && c != '*' && c != '/' && c != ' ')
             throw std::runtime_error("Error: Invalid character in expression. Only digits, spaces, and operators (+, -, *, /) are allowed.");
     }
