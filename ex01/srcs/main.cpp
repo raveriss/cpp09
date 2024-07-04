@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 17:46:19 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/03 20:40:08 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/04 23:00:35 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 {
     if (argc != EXPECTED_ARGC)
     {
-        std::cerr << "Usage: " << argv[0] << " <expression>" << std::endl;
+        std::cerr << NC << RED_BG << "Usage: " << argv[0] << " \"operant operant operator ...\"" << NC << std::endl;
         return RETURN_FAILURE;
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
     } 
     catch (const std::exception& e) 
     {
-        std::cerr << e.what() << std::endl;
+        std::cerr << NC << RED_BG << e.what() << NC << std::endl;
         return RETURN_FAILURE;
     }
 
