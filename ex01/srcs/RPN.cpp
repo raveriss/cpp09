@@ -84,11 +84,11 @@ void RPN::validateExpression(const std::string & expression)
 
     if (isspace(expression[0]))
 	{ 
-		throw std::runtime_error("Error: Bad string syntax.");
+		throw std::runtime_error("Error: Bad argument syntax.");
     }
     if (isspace(expression[expression.size() - 1]))
 	{
-		throw std::runtime_error("Error: Bad string syntax.");
+		throw std::runtime_error("Error: Bad argument syntax.");
     }
     size_t operandCount = 0;
     size_t operatorCount = 0;
@@ -99,7 +99,7 @@ void RPN::validateExpression(const std::string & expression)
         char c = expression[i];
 
         if (!isdigit(c) && c != '.' && c != '+' && c != '-' && c != '*' && c != '/' && c != ' ')
-            throw std::runtime_error("Error: Bad string syntax.");
+            throw std::runtime_error("Error: Bad argument syntax.");
 
         if (isdigit(c))
         {
@@ -121,12 +121,12 @@ void RPN::validateExpression(const std::string & expression)
         {
             spaceCount++;
             if (i > 0 && isspace(expression[i - 1]))
-                throw std::runtime_error("Error: Bad string syntax.");
+                throw std::runtime_error("Error: Bad argument syntax.");
         }
     }
 
     if (spaceCount != operandCount + operatorCount - 1)
-        throw std::runtime_error("Error: Bad string syntax.");
+        throw std::runtime_error("Error: Bad argument syntax.");
 
     if (operandCount != operatorCount + 1 || operatorCount == 0)
         throw std::runtime_error("Error: Operands/Operators.");

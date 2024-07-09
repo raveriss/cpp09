@@ -18,7 +18,6 @@
     if (expression) { std::cout << "\033[32m[TEST PASSED]\033[0m " << message << std::endl; } \
     else { std::cout << "\033[31m[TEST FAILED]\033[0m " << message << std::endl; }
 
-
 /**
  * @brief Get the sum of the numbers from 1 to n with O(n) complexity
  */
@@ -146,6 +145,7 @@ void testPmergeMe()
     // Vérification que les données de l'objet affecté ne sont pas affectées par les modifications de la copie
     ASSERT_TEST(assigned.getData() != copy.getData(), "Assignment operator - Independent data vector after modification");
     ASSERT_TEST(assigned.getDeq() != copy.getDeq(), "Assignment operator - Independent deque after modification");
+    std::cout << std::endl;
 }
 
 /**
@@ -157,14 +157,20 @@ int main(int argc, char* argv[])
     {
         if (argc < EXPECTED_ARGC || (argc > 3 && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == 0))
         {
-            std::cerr << NC << RED_BG << "Usage: " << argv[0] << " num1 num2 ... numN or " << argv[0] << " tester num" << NC << std::endl;
+            std::cerr << NC << RED_BG << "Usage: " << argv[0] << " num1 num2 ... numN or " << argv[0] << " tester num or " << argv[0] << " tester" << NC << std::endl;
             return RETURN_FAILURE;
         }
-        else if (argc == ARG_ONE && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+        
+        else if (argc == ARG_ONE)
         {
-            testPmergeMe();
-            return RETURN_SUCCESS;
+            if (strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS))
+                testPmergeMe();
+                return RETURN_SUCCESS;
+            else
+                std::cerr << NC << RED_BG << "Usage: " << argv[0] << " num1 num2 ... numN or " << argv[0] << " tester num or " << argv[0] << " tester" << NC << std::endl;
+                return RETURN_FAILURE;
         }
+
         else if (argc == ARG_TWO && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
         {
             if (!isPositiveInteger(argv[SECOND_ARGUMENT]))
@@ -213,7 +219,7 @@ int main(int argc, char* argv[])
             {
                 if (!isPositiveInteger(argv[i]))
                 {
-                    std::cerr << NC << RED_BG << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << NC << std::endl;
+                    std::cerr << NC << RED_BG << "Error: Invalid input '" << argv[i] << "'. All inputs must be positive integers." << NC << std::endl << std::endl;
                     return RETURN_FAILURE;
                 }
 
@@ -303,7 +309,7 @@ int main(int argc, char* argv[])
 
             std::cout << BRIGHT_MAGENTA << "Time to process a range of " << pmergeMe.getData().size() << " elements with std::\n" << NC << vectorColor << " vector "
                       << NC << ": " << formatWithSpaces(durationVector, maxWidth) << " us" << std::endl;
-            std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << NC << std::endl;
+            std::cout << dequeColor << "  deque " << NC << ": " << formatWithSpaces(durationDeque, maxWidth) << " us" << NC << std::endl << std::endl;
         }
     }
     catch (const std::exception& e)
