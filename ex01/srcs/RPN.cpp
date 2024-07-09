@@ -67,11 +67,11 @@ double RPN::performOperation(const std::string & operation, double operand1, dou
 	if (operation == "/")
 	{
 		if (operand2 == 0)
-			throw std::runtime_error("Error: Division by zero");
+			throw std::runtime_error("Error: Division by zero.");
 
 		return operand1 / operand2;
 	}
-	throw std::runtime_error("Invalid operator");
+	throw std::runtime_error("Invalid operator.");
 }
 
 /**
@@ -79,14 +79,59 @@ double RPN::performOperation(const std::string & operation, double operand1, dou
  */
 void RPN::validateExpression(const std::string & expression)
 {
-    for (size_t i = 0; i < expression.size(); ++i)
+	if (expression.empty())
+		throw std::runtime_error("Error: Empty argument.");
+
+    if (isspace(expression[0]))
+	{ 
+		throw std::runtime_error("Error: Bad string syntax.");
+    }
+    if (isspace(expression[expression.size() - 1]))
+	{
+		throw std::runtime_error("Error: Bad string syntax.");
+    }
+    size_t operandCount = 0;
+    size_t operatorCount = 0;
+    size_t spaceCount = 0;
+
+    for (size_t i = 0; i < expression.size(); i++)
     {
         char c = expression[i];
 
         if (!isdigit(c) && c != '.' && c != '+' && c != '-' && c != '*' && c != '/' && c != ' ')
-            throw std::runtime_error("Error: Invalid character in expression. Only digits, spaces, and operators (+, -, *, /) are allowed.");
+            throw std::runtime_error("Error: Bad string syntax.");
+
+        if (isdigit(c))
+        {
+            size_t numLength = 0;
+            while (i + numLength < expression.size() && isdigit(expression[i + numLength]))
+                numLength++;
+
+            if (numLength > 1)
+                throw std::runtime_error("Error: Numbers greater than 9.");
+
+            operandCount++;
+            i += numLength - 1;
+        }
+        else if (isOperator(std::string(1, c)))
+        {
+            operatorCount++;
+        }
+        else if (isspace(c))
+        {
+            spaceCount++;
+            if (i > 0 && isspace(expression[i - 1]))
+                throw std::runtime_error("Error: Bad string syntax.");
+        }
     }
+
+    if (spaceCount != operandCount + operatorCount - 1)
+        throw std::runtime_error("Error: Bad string syntax.");
+
+    if (operandCount != operatorCount + 1 || operatorCount == 0)
+        throw std::runtime_error("Error: Operands/Operators.");
 }
+
 
 /**
  * @brief Function to evaluate an expression
@@ -113,7 +158,7 @@ double RPN::evaluate(const std::string & expression)
 		else if (isOperator(token))
 		{
 			if (_stack.size() < 2)
-				throw std::runtime_error("Error: Not enough operands for operation");
+				throw std::runtime_error("Error: Not enough operands for operation.");
 			double operand2 = _stack.top();
 			_stack.pop();
 			double operand1 = _stack.top();
@@ -123,12 +168,12 @@ double RPN::evaluate(const std::string & expression)
 		}
 
 		else
-			throw std::runtime_error("Error");
+			throw std::runtime_error("Error.");
 	}
 
 	/* Check if there is only one operand left on the stack */
 	if (_stack.size() != 1)
-		throw std::runtime_error("Error: Too many operands left on the stack");
+		throw std::runtime_error("Error: Too many operands left on the stack.");
 
 	return _stack.top();
 }
