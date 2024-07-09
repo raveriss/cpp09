@@ -1,45 +1,37 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 19:53:13 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/02 21:26:01 by raveriss         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../incs/PmergeMe.hpp"
 
-/**
- * @brief Default constructor
- */
-PmergeMe::PmergeMe()
-{}
+PmergeMe::PmergeMe() {}
 
-/**
- * @brief Copy constructor
- */
-PmergeMe::PmergeMe(const PmergeMe & other)
-{
-    (void)other;
-}
+PmergeMe::PmergeMe(const PmergeMe& other) : m_data(other.m_data), m_deq(other.m_deq) {}
 
-/**
- * @brief Assignment operator
- */
-PmergeMe & PmergeMe::operator = (const PmergeMe & other)
+PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
     if (this != &other)
-    {}
+    {
+        m_data = other.m_data;
+        m_deq = other.m_deq;
+    }
     return *this;
 }
 
-/**
- * @brief Destructor
- */
-PmergeMe::~PmergeMe()
-{}
+PmergeMe::~PmergeMe() {}
 
-/* PmergeMe.cpp */
+void PmergeMe::setData(const std::vector<int>& data)
+{
+    m_data = data;
+}
+
+void PmergeMe::setDeq(const std::deque<int>& deq)
+{
+    m_deq = deq;
+}
+
+std::vector<int>& PmergeMe::getData()
+{
+    return m_data;
+}
+
+std::deque<int>& PmergeMe::getDeq()
+{
+    return m_deq;
+}

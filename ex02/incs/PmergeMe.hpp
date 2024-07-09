@@ -43,7 +43,7 @@
 /* Define values */
 #define RETURN_SUCCESS 0
 #define RETURN_FAILURE 1
-#define EXPECTED_ARGC 3
+#define EXPECTED_ARGC 2
 
 /* 1000 a 4 chiffres */
 #define MAX_DIGITS 4
@@ -102,19 +102,20 @@
  */
 class PmergeMe
 {
-    private:
-
-        /* Constructeur par défaut */
+    public:
         PmergeMe();
-
-        /* Constructeur par copie */
-        PmergeMe(const PmergeMe & other);
-
-        /* Opérateur d'affectation */
-        PmergeMe & operator = (const PmergeMe & other);
-
-        /* Destructeur */
+        PmergeMe(const PmergeMe& other);
+        PmergeMe& operator=(const PmergeMe& other);
         ~PmergeMe();
+
+        void setData(const std::vector<int>& data);
+        void setDeq(const std::deque<int>& deq);
+        std::vector<int>& getData();
+        std::deque<int>& getDeq();
+
+    private:
+        std::vector<int> m_data;
+        std::deque<int> m_deq;
 };
 
 /* Inclusion du fichier template */
