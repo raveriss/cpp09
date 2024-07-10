@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 01:10:40 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 22:30:48 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:05:00 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,10 @@
 class PmergeMe
 {
     public:
-        PmergeMe();
         PmergeMe(const PmergeMe& other);
         PmergeMe& operator=(const PmergeMe& other);
         ~PmergeMe();
+        PmergeMe();
 
         void setData(const std::vector<int>& data);
         void setDeq(const std::deque<int>& deq);

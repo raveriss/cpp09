@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:29:15 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:22:15 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:03:54 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ std::string intToString(int number)
 
 void testPmergeMe()
 {
-    // Création d'un objet PmergeMe et initialisation des données
+    /* Création d'un objet PmergeMe et initialisation des données */
     std::vector<int> vec;
     vec.push_back(1);
     vec.push_back(2);
@@ -99,9 +99,9 @@ void testPmergeMe()
     original.setData(vec);
     original.setDeq(deq);
 
-    // Test du constructeur de copie
+    /* Test du constructeur de copie */
     PmergeMe copy(original);
-    ASSERT_TEST(copy.getData() == original.getData(), "Copy constructor - Data vector");
+    ASSERT_TEST(copy.getData() == original.getData(), "Copy constructor - vector");
     ASSERT_TEST(copy.getDeq() == original.getDeq(), "Copy constructor - Deque");
 
     // Modification de l'objet original
@@ -163,12 +163,16 @@ int main(int argc, char* argv[])
         
         else if (argc == ARG_ONE)
         {
-            if (strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS))
+            if (strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)
+            {
                 testPmergeMe();
                 return RETURN_SUCCESS;
+            }
             else
+            {
                 std::cerr << NC << RED_BG << "Usage: " << argv[0] << " num1 num2 ... numN or " << argv[0] << " tester num or " << argv[0] << " tester" << NC << std::endl;
                 return RETURN_FAILURE;
+            }
         }
 
         else if (argc == ARG_TWO && strcmp(argv[FIRST_ARGUMENT], TEST_ARG) == STRING_COMPARE_SUCCESS)

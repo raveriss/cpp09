@@ -6,7 +6,7 @@
 /*   By: raveriss <raveriss@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 18:14:23 by raveriss          #+#    #+#             */
-/*   Updated: 2024/07/04 23:55:36 by raveriss         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:25:27 by raveriss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,11 @@ void RPN::validateExpression(const std::string & expression)
 		throw std::runtime_error("Error: Empty argument.");
 
     if (isspace(expression[0]))
-	{ 
 		throw std::runtime_error("Error: Bad argument syntax.");
-    }
+
     if (isspace(expression[expression.size() - 1]))
-	{
 		throw std::runtime_error("Error: Bad argument syntax.");
-    }
+
     size_t operandCount = 0;
     size_t operatorCount = 0;
     size_t spaceCount = 0;
@@ -114,9 +112,7 @@ void RPN::validateExpression(const std::string & expression)
             i += numLength - 1;
         }
         else if (isOperator(std::string(1, c)))
-        {
             operatorCount++;
-        }
         else if (isspace(c))
         {
             spaceCount++;
@@ -131,7 +127,6 @@ void RPN::validateExpression(const std::string & expression)
     if (operandCount != operatorCount + 1 || operatorCount == 0)
         throw std::runtime_error("Error: Operands/Operators.");
 }
-
 
 /**
  * @brief Function to evaluate an expression
